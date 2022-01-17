@@ -1,16 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-func plus(a ...int) int {
-	var total int
-	for index, item := range a {
-		total += item
-	}
-	return total
-}
+	"github.com/devgony/nomadcoin/person"
+)
 
 func main() {
-	result := plus(2, 3, 4, 5, 6)
-	fmt.Println(result)
+	henry := person.Person{}
+	henry.SetDetails("henry", 12)
+	fmt.Println(henry)
 }
