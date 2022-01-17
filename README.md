@@ -375,3 +375,88 @@ func home(rw http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(rw, data)
 }
 ```
+
+# 5.2 Rendering Blocks (07:09)
+
+- install extension: `gotemplate-syntax`
+- mvp.css: https://andybrewer.github.io/mvp/
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+```
+
+- just copy & paste html? => partials => glob import
+
+```sh
+mkdir templates/partials
+touch templates/partials/footer.gohtml
+touch templates/partials/head.gohtml
+touch templates/partials/header.gohtml
+touch templates/partials/block.gohtml
+
+mkdir templates/pages
+move templates/home.gohtml templates/pages/home.gohtml
+touch templates/pages/add.gohtml
+```
+
+# 5.3 Using Partials (10:34)
+
+```sh
+touch partials/block.gohtml
+```
+
+- load
+
+```go
+{{template "head"}}
+```
+
+- load glob
+  - can't use `**/` so that parseGlob n times
+
+```go
+templates = template.Must(template.ParseGlob(templateDir + "pages/*.gohtml"))
+templates = template.Must(templates.ParseGlob(templateDir + "partials/*.gohtml")) // template^s
+```
+
+# 5.4 Adding A Block (14:44)
+
+## passing struct
+
+1. template of template use `.`
+
+```go
+// home.gohtml
+{{template "header" .PageTitle}}
+```
+
+```go
+// header.gohtml
+...
+<h1>{{.}}</h1>
+...
+```
+
+2. inside loop, use `.`
+
+```go
+{{range .Blocks}}
+	{{template "block" .}}
+{{end}}
+```
+
+- switch case "GET", "POST"
+
+```go
+func add(rw http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		templates.ExecuteTemplate(rw, "add", nil)
+	case "POST":
+		r.ParseForm()
+		data := r.Form.Get("blockData")
+		blockchain.GetBlockchain().AddBlock(data)
+		http.Redirect(rw, r, "/", http.StatusPermanentRedirect)
+	}
+}
+```
