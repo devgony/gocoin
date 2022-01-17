@@ -322,3 +322,56 @@ func (b *blockchain) AllBlocks() []*block {
 	return b.blocks
 }
 ```
+
+# 5.0 Setup (06:42)
+
+- server side rendering only with std lib
+
+```go
+const port string = ":4000"
+
+func home(rw http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(rw, "Hello from home!") // print to writer
+}
+
+func main() {
+	http.HandleFunc("/", home)
+	fmt.Printf("Listening on http://localhost%s\n", port)
+	log.Fatal(http.ListenAndServe(port, nil)) // if failed exit 1 else none
+}
+```
+
+# 5.1 Rendering Templates (08:10)
+
+```sh
+mkdir templates
+touch templates/home.html
+```
+
+- template.Must
+
+```go
+tmpl, err := template.ParseFiles("templates/home.html")
+if err != nil {
+		log.Fatal((err))
+}
+```
+
+```go
+tmpl := template.Must(template.ParseFiles("templates/home.html"))
+```
+
+- template
+
+```go
+type homeData struct {
+	PageTitle string
+	Blocks    []*blockchain.Block
+}
+
+func home(rw http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/home.html"))
+	data := homeData{"Home", blockchain.GetBlockchain().AllBlocks()}
+	tmpl.Execute(rw, data)
+}
+```
