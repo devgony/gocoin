@@ -145,3 +145,104 @@ func (p *Person) SetDetails(name string, age int) {
 	p.name = name
 	p.age = age
 ```
+
+# 4.0 Introduction (05:05)
+
+- Concentrate to blockchain concept, solve side problem later
+
+# 4.1 Our First Block (13:58)
+
+- if any block is edited, invalid
+
+```
+b1Hash = (data + "")
+b2Hash = (data + b1Hash)
+b3Hash = (data + b2Hash)
+```
+
+- sha256 needs slice of bytes: cuz string is immutable
+
+```go
+genesisBlock := block{"Genesis Block", "", ""}
+hash := sha256.Sum256([]byte(genesisBlock.data + genesisBlock.prevHash))
+hexHash := fmt.Sprintf("%x", hash)
+genesisBlock.hash = hexHash
+secondBlocks := block{"Second Blocks", "", genesisBlock.hash}
+```
+
+# 4.2 Our First Blockchain (09:43)
+
+```go
+type block struct {
+	data     string
+	hash     string
+	prevHash string
+}
+
+type blockchain struct {
+	blocks []block
+}
+
+func (b *blockchain) getLastHash() string {
+	if len(b.blocks) > 0 {
+		return b.blocks[len(b.blocks)-1].hash
+	}
+	return ""
+}
+
+func (b *blockchain) addBlock(data string) {
+	newBlock := block{data, "", b.getLastHash()}
+	hash := sha256.Sum256([]byte(newBlock.data + newBlock.prevHash))
+	newBlock.hash = fmt.Sprintf("%x", hash)
+	b.blocks = append(b.blocks, newBlock)
+}
+
+func (b *blockchain) listBlocks() {
+	for _, block := range b.blocks {
+		fmt.Printf("Data: %s\n", block.data)
+		fmt.Printf("Hash: %s\n", block.hash)
+		fmt.Printf("PrevHash: %s\n", block.prevHash)
+	}
+}
+
+func main() {
+	chain := blockchain{}
+	chain.addBlock("Genesis Block")
+	chain.addBlock("Second Block")
+	chain.addBlock("Third Block")
+	chain.listBlocks()
+}
+```
+
+# 4.3 Singleton Pattern (05:57)
+
+```sh
+mkdir blockchain
+touch blockchain/blockchain.go
+```
+
+- singletone: share only 1 instance
+
+```go
+// blockchain/blockchain.go
+package blockchain
+
+type block struct {
+	data     string
+	hash     string
+	prevHash string
+}
+
+type blockchain struct {
+	blocks []block
+}
+
+var b *blockchain
+
+func GetBlockchain() *blockchain {
+	if b == nil {
+		b = &blockchain{}
+	}
+	return b
+}
+```

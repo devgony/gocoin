@@ -1,13 +1,7 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/devgony/nomadcoin/person"
-)
+import "github.com/devgony/nomadcoin/blockchain"
 
 func main() {
-	henry := person.Person{}
-	henry.SetDetails("henry", 12)
-	fmt.Println(henry)
+	chain := blockchain.GetBlockchain()
 }
