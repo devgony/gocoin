@@ -540,3 +540,23 @@ func (u URL) MarshalText() ([]byte, error) {
 	return []byte(url), nil
 }
 ```
+
+# 6.3 JSON Decode (14:00)
+
+- VSC extension: REST client
+
+```sh
+# touch api.http
+http://localhost:4000/blocks
+# send request by clicking
+POST http://localhost:4000/blocks
+{
+    "message": "Data for my block"
+}
+```
+
+- should pass pointer(address) to decode
+
+```go
+utils.HandleErr(json.NewDecoder(r.Body).Decode(&addBlockBody))
+```
