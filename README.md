@@ -519,3 +519,24 @@ Payload     string `json:"payload,omitempty"` // omit if empty
 ...
 Payload:     "data:string", // write data on body
 ```
+
+# 6.2 MarshalText (13:38)
+
+## Interface
+
+- if impl Stringer, can control fmt
+
+```go
+func (u URLDescription) String() string {
+	return "Hello I'm a URL Description"
+}
+```
+
+- prepend `http://localhost`
+
+```go
+func (u URL) MarshalText() ([]byte, error) {
+	url := fmt.Sprintf("http://localhost%s%s", port, u)
+	return []byte(url), nil
+}
+```
