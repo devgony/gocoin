@@ -492,3 +492,30 @@ func HandleErr(err error) {
 ## `json.Marshal(data)`
 
 - Marshal: convert from goInterface to JSON
+
+# 6.1 Marshal and Field Tags (11:18)
+
+- manual marshal
+
+```go
+rw.Header().Add("Content-Type", "application/json")
+b, err := json.Marshal(data)
+utils.HandleErr(err)
+fmt.Fprintf(rw, "%s", b)
+```
+
+- simple marshal
+
+```go
+json.NewEncoder(rw).Encode(data)
+```
+
+- struct field tag  
+  https://pkg.go.dev/encoding/json#Marshal
+
+```go
+Description string `json:"description"` // make lowercase
+Payload     string `json:"payload,omitempty"` // omit if empty
+...
+Payload:     "data:string", // write data on body
+```
