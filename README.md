@@ -622,3 +622,19 @@ vars := mux.Vars(r)
 ```go
 id, err := strconv.Atoi(vars["height"])
 ```
+
+# 6.7 Error Handling (05:00)
+
+- new error
+
+```go
+var ErrNotFound = errors.New("block not found")
+```
+
+- new errorResponse
+
+```go
+type errorResponse struct {
+	ErrorMessage string `json:"errorMessage"`
+}
+```
