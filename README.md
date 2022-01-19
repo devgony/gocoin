@@ -614,3 +614,11 @@ router := mux.NewRouter()
 ...
 vars := mux.Vars(r)
 ```
+
+# 6.6 Atoi (08:42)
+
+- string to int
+
+```go
+id, err := strconv.Atoi(vars["height"])
+```
