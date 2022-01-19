@@ -560,3 +560,43 @@ POST http://localhost:4000/blocks
 ```go
 utils.HandleErr(json.NewDecoder(r.Body).Decode(&addBlockBody))
 ```
+
+# 6.4 NewServeMux (11:50)
+
+- quick refactoring
+
+```sh
+mkdir rest
+sed 's/main()/Start()/; s/package main/package rest/' main.go > rest/rest.go
+echo "package main\nfunc main() {}" > main.go
+```
+
+- dynamic port
+
+```go
+var port string
+...
+func Start(aPort int) {
+	port = fmt.Sprint(":%d", aPort)
+```
+
+```go
+// explorer.go
+fmt.Printf("Listening on http://localhost:%d\n", port)
+log.Fatal(http.ListenAndServe(fmt.Sprint(":%d", port), nil)
+```
+
+## use NewServeMux
+
+- to solve duped route
+- nil -> defaultServeMux, handler -> NewServeMux
+
+```go
+// rest.go
+handler := http.NewServeMux()
+...
+handler.HandleFunc("/", documentation)
+handler.HandleFunc("/blocks", blocks)
+...
+log.Fatal(http.ListenAndServe(port, handler))
+```
