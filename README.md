@@ -600,3 +600,17 @@ handler.HandleFunc("/blocks", blocks)
 ...
 log.Fatal(http.ListenAndServe(port, handler))
 ```
+
+# 6.5 Gorilla Mux (08:54)
+
+- can handle params
+
+```sh
+go get -u github.com/gorilla/mux
+```
+
+```go
+router := mux.NewRouter()
+...
+vars := mux.Vars(r)
+```
