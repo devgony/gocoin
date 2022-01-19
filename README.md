@@ -460,3 +460,16 @@ func add(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 ```
+
+# 5.5 Refactoring (04:42)
+
+```sh
+mkdir explorer
+mv templates explorer/
+cp main.go explorer/explorer.go
+```
+
+```go
+// explorer/explorer.go
+	templateDir string = "explorer/templates/"
+```
