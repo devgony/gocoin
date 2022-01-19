@@ -473,3 +473,22 @@ cp main.go explorer/explorer.go
 // explorer/explorer.go
 	templateDir string = "explorer/templates/"
 ```
+
+# 6.0 Setup (09:03)
+
+- REST API
+
+```go
+mkdir utils
+touch utils/utils.go
+
+func HandleErr(err error) {
+	if err != nil {
+		log.Panic(err)
+	}
+}
+```
+
+## `json.Marshal(data)`
+
+- Marshal: convert from goInterface to JSON
