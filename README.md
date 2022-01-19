@@ -421,7 +421,7 @@ templates = template.Must(templates.ParseGlob(templateDir + "partials/*.gohtml")
 
 # 5.4 Adding A Block (14:44)
 
-## passing struct
+## Cursor synatax `.`: passing struct
 
 1. template of template use `.`
 
