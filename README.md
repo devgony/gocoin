@@ -681,3 +681,22 @@ if rest.Parsed() {
 		fmt.Println("Start server")
 }
 ```
+
+# 7.3 Flag (10:08)
+
+- easier than flagSet
+
+```go
+port := flag.Int("port", 4000, "Set port of the server")
+mode := flag.String("mode", "rest", "Choose between 'html' and 'rest'"
+```
+
+- refactor main.go > cli/cli.go
+
+```sh
+mkdir cli
+sed 's/main()/Start()/; s/package main/package cli/' main.go > cli/cli.go
+echo "package main\nfunc main() {}" > main.go
+```
+
+- challenge: make command to run both with differen port and goroutine
