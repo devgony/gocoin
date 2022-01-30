@@ -802,7 +802,8 @@ func SaveBlock(hash string, data []byte) {
 
 ## 8.4 Persisting The Blockchain (10:55)
 
-- inferface -> can get any type
+- move ToBytes from `block.go` to `utils.go`
+  - inferface -> can get any type
 
 ```go
 // utils/utils.go
@@ -811,5 +812,31 @@ func ToBytes(i interface{}) []byte {
 	encoder := gob.NewEncoder(&aBuffer)
 	HandleErr(encoder.Encode(i))
 	return aBuffer.Bytes()
+}
+```
+
+## 8.5 Restoring the Blockchain (12:28)
+
+- when we start, should restore chain from checkpoint
+- restore from byte to data
+
+```go
+func (b *blockchain) restore(data []byte) {
+	decoder := gob.NewDecoder(bytes.NewReader(data))
+	utils.HandleErr(decoder.Decode(b)) // with pointer, modify the origin value from byte to data
+}
+```
+
+- select checkpoint
+
+```go
+func Checkpoint() []byte {
+	var data []byte
+	DB().View(func(t *bolt.Tx) error {
+		bucket := t.Bucket(([]byte(dataBucket)))
+		data = bucket.Get([]byte(checkpoint))
+		return nil
+	})
+	return data
 }
 ```
