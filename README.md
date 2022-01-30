@@ -759,7 +759,43 @@ func DB() *bolt.DB {
 
 ## 8.2 A New Blockchain (11:53)
 
+- divide & conquer
+
 ```sh
 mv blockchain/blockchain.go blockchain/chain.go
 touch blockchain/block.go
+```
+
+## 8.3 Saving A Block (12:25)
+
+- gob: encode/decode data<->byte
+- buffer: place to put byte with write/read
+
+```go
+// blockchain/block.go
+func (b *Block) toBytes() []byte {
+	var blockBuffer bytes.Buffer
+	encoder := gob.NewEncoder(&blockBuffer)
+	utils.HandleErr(encoder.Encode(b))
+	return blockBuffer.Bytes()
+}
+
+func (b *Block) persist() {
+	db.SaveBlock(b.Hash, b.toBytes())
+}
+```
+
+- SaveBlock: bolt can save only byte
+
+```go
+// db/db.go
+func SaveBlock(hash string, data []byte) {
+	fmt.Printf("Saving Block %s\nData: %b\n", hash, data)
+	err := DB().Update(func(t *bolt.Tx) error {
+		bucket := t.Bucket([]byte(blocksBucket))
+		err := bucket.Put([]byte(hash), data)
+		return err
+	})
+	utils.HandleErr(err)
+}
 ```
