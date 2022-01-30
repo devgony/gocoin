@@ -656,3 +656,28 @@ type errorResponse struct {
 - cobra
 
 # 7.1 Parsing Commands (05:52)
+
+- os.Args gives array of commands
+
+```sh
+go run main.go someCMD
+-> [.../exe/main someCMD]
+```
+
+- to exit, use `os.Exit(0)`
+
+# 7.2 FlagSet (10:26)
+
+- flagSet is useful if one command has many flags
+
+```go
+rest := flag.NewFlagSet("rest", flag.ExitOnError)
+portFlag := rest.Int("port", 4000, "Sets the port of the server")
+...
+rest.Parse(os.Arge[2:])
+...
+if rest.Parsed() {
+		fmt.Println(*portFlag)
+		fmt.Println("Start server")
+}
+```
