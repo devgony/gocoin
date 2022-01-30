@@ -1,10 +1,14 @@
-# 2.2 Why Go (06:17)
+# 2. INTRODUCTION
+
+## 2.2 Why Go (06:17)
 
 - Only 1 option: for loop
 - Powerful standard library
 - Low learning curve
 
-# 3.0 Creating the Project (04:30)
+# 3. TOUR OF GO
+
+## 3.0 Creating the Project (04:30)
 
 ```sh
 go mod init github.com/devgony/nomadcoin
@@ -13,9 +17,9 @@ ls
 touch main.go
 ```
 
-# 3.1 Variables in Go (07:54)
+## 3.1 Variables in Go (07:54)
 
-## create and update var syntax (should be inside func only)
+### create and update var syntax (should be inside func only)
 
 ```go
 var name string = "henry"
@@ -25,7 +29,7 @@ name := "henry" // same with above, syntax sugar
 - var, const
 - bool, string, int(8,16..64), uint(8,16..64) byte, float(32,64)
 
-# 3.2 Functions (08:59)
+## 3.2 Functions (08:59)
 
 - If params have same type, specify only at the last
 - func can return two types
@@ -48,7 +52,7 @@ func plus(a ...int) int {
 }
 ```
 
-# 3.3 fmt (03:52)
+## 3.3 fmt (03:52)
 
 ```go
 x := 84375983402
@@ -59,7 +63,7 @@ fmt.Printf("%x\n", x)
 fmt.Printf("%U\n", x)
 ```
 
-# 3.4 Slices and Arrays (08:02)
+## 3.4 Slices and Arrays (08:02)
 
 - array is declarative and limited in go
 
@@ -79,7 +83,7 @@ foods = append(foods, "t") // returns appended slice (should set to var manually
 fmt.Printf("%v\n", foods)
 ```
 
-# 3.5 Pointers (08:44)
+## 3.5 Pointers (08:44)
 
 ```go
 a := 2
@@ -89,9 +93,9 @@ a = 9
 fmt.Println(a, b, *c) // 9 2 9
 ```
 
-# 3.6 Structs (07:11)
+## 3.6 Structs (07:11)
 
-## struct (like class)
+### struct (like class)
 
 ```go
 type person struct {
@@ -100,7 +104,7 @@ type person struct {
 }
 ```
 
-## receiver function (like methods)
+### receiver function (like methods)
 
 - choose first letter of type as a alias
 
@@ -111,7 +115,7 @@ func (p person) sayHello() {
 }
 ```
 
-# 3.7 Structs with Pointers (09:35)
+## 3.7 Structs with Pointers (09:35)
 
 ```sh
 mkdir person
@@ -133,7 +137,7 @@ func (p Person) SetDetails(name string, age int) {
 }
 ```
 
-## Receiver pointer function
+### Receiver pointer function
 
 - basically receiver function's p is copy -> use only for read
 - we don't want to mutate copied, but origin
@@ -146,11 +150,13 @@ func (p *Person) SetDetails(name string, age int) {
 	p.age = age
 ```
 
-# 4.0 Introduction (05:05)
+# 4. BLOCKCHAIN
+
+## 4.0 Introduction (05:05)
 
 - Concentrate to blockchain concept, solve side problem later
 
-# 4.1 Our First Block (13:58)
+## 4.1 Our First Block (13:58)
 
 - if any block is edited, invalid
 
@@ -170,7 +176,7 @@ genesisBlock.hash = hexHash
 secondBlocks := block{"Second Blocks", "", genesisBlock.hash}
 ```
 
-# 4.2 Our First Blockchain (09:43)
+## 4.2 Our First Blockchain (09:43)
 
 ```go
 type block struct {
@@ -214,7 +220,7 @@ func main() {
 }
 ```
 
-# 4.3 Singleton Pattern (05:57)
+## 4.3 Singleton Pattern (05:57)
 
 ```sh
 mkdir blockchain
@@ -247,7 +253,7 @@ func GetBlockchain() *blockchain {
 }
 ```
 
-# 4.4 Refactoring part One (09:16)
+## 4.4 Refactoring part One (09:16)
 
 - Package sync.once: keep running once though ran by goroutine
 
@@ -260,7 +266,7 @@ once.Do(func() {
 
 - Blockchain should be a slice of pointer with borrow (it will be way longer)
 
-# 4.5 Refactoring part Two (07:15)
+## 4.5 Refactoring part Two (07:15)
 
 ```go
 package blockchain
@@ -323,7 +329,9 @@ func (b *blockchain) AllBlocks() []*block {
 }
 ```
 
-# 5.0 Setup (06:42)
+# 5. EXPLORER
+
+## 5.0 Setup (06:42)
 
 - server side rendering only with std lib
 
@@ -341,7 +349,7 @@ func main() {
 }
 ```
 
-# 5.1 Rendering Templates (08:10)
+## 5.1 Rendering Templates (08:10)
 
 ```sh
 mkdir templates
@@ -376,7 +384,7 @@ func home(rw http.ResponseWriter, r *http.Request) {
 }
 ```
 
-# 5.2 Rendering Blocks (07:09)
+## 5.2 Rendering Blocks (07:09)
 
 - install extension: `gotemplate-syntax`
 - mvp.css: https://andybrewer.github.io/mvp/
@@ -399,7 +407,7 @@ move templates/home.gohtml templates/pages/home.gohtml
 touch templates/pages/add.gohtml
 ```
 
-# 5.3 Using Partials (10:34)
+## 5.3 Using Partials (10:34)
 
 ```sh
 touch partials/block.gohtml
@@ -419,9 +427,9 @@ templates = template.Must(template.ParseGlob(templateDir + "pages/*.gohtml"))
 templates = template.Must(templates.ParseGlob(templateDir + "partials/*.gohtml")) // template^s
 ```
 
-# 5.4 Adding A Block (14:44)
+## 5.4 Adding A Block (14:44)
 
-## Cursor synatax `.`: passing struct
+### Cursor synatax `.`: passing struct
 
 1. template of template use `.`
 
@@ -461,7 +469,7 @@ func add(rw http.ResponseWriter, r *http.Request) {
 }
 ```
 
-# 5.5 Refactoring (04:42)
+## 5.5 Refactoring (04:42)
 
 ```sh
 mkdir explorer
@@ -474,7 +482,9 @@ cp main.go explorer/explorer.go
 	templateDir string = "explorer/templates/"
 ```
 
-# 6.0 Setup (09:03)
+# 6. REST API
+
+## 6.0 Setup (09:03)
 
 - REST API
 
@@ -489,11 +499,11 @@ func HandleErr(err error) {
 }
 ```
 
-## `json.Marshal(data)`
+### `json.Marshal(data)`
 
 - Marshal: convert from goInterface to JSON
 
-# 6.1 Marshal and Field Tags (11:18)
+## 6.1 Marshal and Field Tags (11:18)
 
 - manual marshal
 
@@ -520,9 +530,9 @@ Payload     string `json:"payload,omitempty"` // omit if empty
 Payload:     "data:string", // write data on body
 ```
 
-# 6.2 MarshalText (13:38)
+## 6.2 MarshalText (13:38)
 
-## Interface
+### Interface
 
 - if impl Stringer, can control fmt
 
@@ -541,14 +551,14 @@ func (u URL) MarshalText() ([]byte, error) {
 }
 ```
 
-# 6.3 JSON Decode (14:00)
+## 6.3 JSON Decode (14:00)
 
 - Install VSC extension: REST client
 
 ```sh
-# touch api.http
+## touch api.http
 http://localhost:4000/blocks
-# send request by clicking
+## send request by clicking
 POST http://localhost:4000/blocks
 {
     "message": "Data for my block"
@@ -561,7 +571,7 @@ POST http://localhost:4000/blocks
 utils.HandleErr(json.NewDecoder(r.Body).Decode(&addBlockBody))
 ```
 
-# 6.4 NewServeMux (11:50)
+## 6.4 NewServeMux (11:50)
 
 - quick refactoring
 
@@ -586,7 +596,7 @@ fmt.Printf("Listening on http://localhost:%d\n", port)
 log.Fatal(http.ListenAndServe(fmt.Sprint(":%d", port), nil)
 ```
 
-## use NewServeMux
+### use NewServeMux
 
 - to solve duped route
 - nil -> defaultServeMux, handler -> NewServeMux
@@ -601,7 +611,7 @@ handler.HandleFunc("/blocks", blocks)
 log.Fatal(http.ListenAndServe(port, handler))
 ```
 
-# 6.5 Gorilla Mux (08:54)
+## 6.5 Gorilla Mux (08:54)
 
 - can handle params
 
@@ -615,7 +625,7 @@ router := mux.NewRouter()
 vars := mux.Vars(r)
 ```
 
-# 6.6 Atoi (08:42)
+## 6.6 Atoi (08:42)
 
 - string to int
 
@@ -623,7 +633,7 @@ vars := mux.Vars(r)
 id, err := strconv.Atoi(vars["height"])
 ```
 
-# 6.7 Error Handling (05:00)
+## 6.7 Error Handling (05:00)
 
 - new error
 
@@ -639,23 +649,25 @@ type errorResponse struct {
 }
 ```
 
-# 6.8 Middlewares (10:01)
+## 6.8 Middlewares (10:01)
 
 - Middleware is a function to call before final destination
 
-## adapter pattern
+### adapter pattern
 
 - `Handler` is an interface implementing method called ServerHTTP
 - `HandlerFunc` is type (adapter)
   - `HandlerFunc()`: constructing a type
   - adaptor ask us to send correct argument and adaptor implement everything we need
 
-# 7.0 Introduction - CLI
+# 7. CLI
+
+## 7.0 Introduction
 
 - flag
 - cobra
 
-# 7.1 Parsing Commands (05:52)
+## 7.1 Parsing Commands (05:52)
 
 - os.Args gives array of commands
 
@@ -666,7 +678,7 @@ go run main.go someCMD
 
 - to exit, use `os.Exit(0)`
 
-# 7.2 FlagSet (10:26)
+## 7.2 FlagSet (10:26)
 
 - flagSet is useful if one command has many flags
 
@@ -682,7 +694,7 @@ if rest.Parsed() {
 }
 ```
 
-# 7.3 Flag (10:08)
+## 7.3 Flag (10:08)
 
 - easier than flagSet
 
@@ -700,3 +712,7 @@ echo "package main\nfunc main() {}" > main.go
 ```
 
 - challenge: make command to run both with differen port and goroutine
+
+# 8. PERSISTENCE
+
+## 8.0 Introduction to Bolt (08:09)
