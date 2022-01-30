@@ -638,3 +638,14 @@ type errorResponse struct {
 	ErrorMessage string `json:"errorMessage"`
 }
 ```
+
+# 6.8 Middlewares (10:01)
+
+- Middleware is a function to call before final destination
+
+## adapter pattern
+
+- `Handler` is an interface implementing method called ServerHTTP
+- `HandlerFunc` is type (adapter)
+  - `HandlerFunc()`: constructing a type
+  - adaptor ask us to send correct argument and adaptor implement everything we need
