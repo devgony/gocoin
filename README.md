@@ -543,7 +543,7 @@ func (u URL) MarshalText() ([]byte, error) {
 
 # 6.3 JSON Decode (14:00)
 
-- VSC extension: REST client
+- Install VSC extension: REST client
 
 ```sh
 # touch api.http
@@ -649,3 +649,10 @@ type errorResponse struct {
 - `HandlerFunc` is type (adapter)
   - `HandlerFunc()`: constructing a type
   - adaptor ask us to send correct argument and adaptor implement everything we need
+
+# 7.0 Introduction - CLI
+
+- flag
+- cobra
+
+# 7.1 Parsing Commands (05:52)
