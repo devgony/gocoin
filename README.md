@@ -716,3 +716,7 @@ echo "package main\nfunc main() {}" > main.go
 # 8. PERSISTENCE
 
 ## 8.0 Introduction to Bolt (08:09)
+
+- currently everthing is on memory (slice of block)
+- bolt: key/value database specified for get/set
+  - eg) "sdkfljsdlfjds": {"data: PrvHash"}
