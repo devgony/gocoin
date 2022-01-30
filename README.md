@@ -799,3 +799,17 @@ func SaveBlock(hash string, data []byte) {
 	utils.HandleErr(err)
 }
 ```
+
+## 8.4 Persisting The Blockchain (10:55)
+
+- inferface -> can get any type
+
+```go
+// utils/utils.go
+func ToBytes(i interface{}) []byte {
+	var aBuffer bytes.Buffer
+	encoder := gob.NewEncoder(&aBuffer)
+	HandleErr(encoder.Encode(i))
+	return aBuffer.Bytes()
+}
+```
