@@ -756,3 +756,10 @@ func DB() *bolt.DB {
 	return db
 }
 ```
+
+## 8.2 A New Blockchain (11:53)
+
+```sh
+mv blockchain/blockchain.go blockchain/chain.go
+touch blockchain/block.go
+```
