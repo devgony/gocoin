@@ -720,3 +720,39 @@ echo "package main\nfunc main() {}" > main.go
 - currently everthing is on memory (slice of block)
 - bolt: key/value database specified for get/set
   - eg) "sdkfljsdlfjds": {"data: PrvHash"}
+
+## 8.1 Creating the Database (11:47)
+
+- There will be no immediate `Start` so that start coding from `db/db.go`
+
+```sh
+mkdir db
+touch db/db.go
+go get github.com/boltdb/bolt
+```
+
+```go
+const (
+	dbName       = "blockchain.db"
+	dataBucket   = "data"
+	blocksBucket = "blocks"
+)
+
+var db *bolt.DB
+
+func DB() *bolt.DB {
+	if db == nil {
+		dbPointer, err := bolt.Open(dbName, 0600, nil)
+		db = dbPointer
+		utils.HandleErr(err)
+		err = db.Update(func(t *bolt.Tx) error {
+			_, err := t.CreateBucketIfNotExists([]byte(dataBucket))
+			utils.HandleErr(err)
+			_, err = t.CreateBucketIfNotExists([]byte(blocksBucket))
+			return err
+		})
+		utils.HandleErr(err)
+	}
+	return db
+}
+```
