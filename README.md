@@ -844,6 +844,15 @@ func Checkpoint() []byte {
 ## 8.6 Restoring Block (13:27)
 
 - Add func FromBytes at `utils.go`
-- refactor func restore with func FromBytes at `chain.go`
+- Refactor func restore with func FromBytes at `chain.go`
 - Add func Block at `db/db.go`
 - Add ErrNotFound, func restore, func FindBlock at `block.go`
+- Omit GET, POST case at `rest.go` for test
+
+## 8.7 All Blocks (10:51)
+
+- Close at `db/db.go`
+- defer Close() at `main.go`
+  - if there is Goexit, deferred calls will be executed
+- Add func Blocks at `chain.go`
+- Recover GET, POST case at `rest.go`
