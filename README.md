@@ -840,3 +840,10 @@ func Checkpoint() []byte {
 	return data
 }
 ```
+
+## 8.6 Restoring Block (13:27)
+
+- Add func FromBytes at `utils.go`
+- refactor func restore with func FromBytes at `chain.go`
+- Add func Block at `db/db.go`
+- Add ErrNotFound, func restore, func FindBlock at `block.go`
