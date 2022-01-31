@@ -856,3 +856,10 @@ func Checkpoint() []byte {
   - if there is Goexit, deferred calls will be executed
 - Add func Blocks at `chain.go`
 - Recover GET, POST case at `rest.go`
+
+## 8.8 Recap (10:46)
+
+- Refactor SaveBlockchain -> SaveCheckpoint
+- bolt, get/set data to bucket
+- singletone -> if no checkpoint -> create genesis
+- func persist -> save to bolt database
