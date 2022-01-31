@@ -863,3 +863,21 @@ func Checkpoint() []byte {
 - bolt, get/set data to bucket
 - singletone -> if no checkpoint -> create genesis
 - func persist -> save to bolt database
+
+# 9 MINING
+
+## 9.0 Introduction to PoW (06:28)
+
+- Proof Of Work
+- Add properties to Block struct at `block.go`
+
+```go
+	Difficulty int    `json:"difficulty"`
+	Nonce      int    `json:"nonce"`
+```
+
+- Delete db
+
+```sh
+rm blockchain.db
+```
