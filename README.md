@@ -901,7 +901,36 @@ for {
 }
 ```
 
-## 9.2 Mine Block
+## 9.2 Mine Block (07:48)
 
 - func mine at `block.go`
 - Modify way get hash -> `block.mine()` at `block.go`
+
+## 9.3 Difficulty part One (10:20)
+
+- Refactor Hash from `block.go` to `utils.go`
+
+```go
+s := fmt.Sprintf("%v", i)
+// v means default formatter
+```
+
+- Add timestamp on each mining at `block.go`
+
+```go
+b.Timestamp = int(time.Now().Unix())
+```
+
+- Add func difficulty at `chain.go`
+
+```go
+func (b *blockchain) difficulty() int {
+	if b.Height == 0 {
+		return defaultDifficulty
+	} else if b.Height%difficultyInterval == 0 {
+		// recalculate the difficulty
+	} else {
+		return b.CurrentDifficulty
+	}
+}
+```
