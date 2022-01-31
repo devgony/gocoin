@@ -900,3 +900,8 @@ for {
 	}
 }
 ```
+
+## 9.2 Mine Block
+
+- func mine at `block.go`
+- Modify way get hash -> `block.mine()` at `block.go`
