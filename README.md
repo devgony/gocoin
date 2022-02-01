@@ -997,3 +997,9 @@ touch blockchain/transactions.go
 
 - Memory pool: where we put unconfirmed transaction
 - After confirmed -> Part of Block
+
+## 10.5 AddTx (10:42)
+
+- Cuz Mempool is on the memory, we don't need to initialize
+- Add struct mempool, var Mempool, func makeTx, AddTx at `transactions.go`
+- Add router mempool at `rest.go`
