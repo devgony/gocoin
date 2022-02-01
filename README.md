@@ -1114,3 +1114,12 @@ Outer:
 - If it is mutating struct -> `method`
 - Else, -> normal `func` with struct as input param
 - Sort method first, func last
+
+## 10.13 Deadlock (03:53)
+
+- Current func Blockchain at `chain.go` is recursive
+- Because no call to Do returns until the one call to f returns, if f causes Do to be called, it will deadlock.
+- Modify logic
+  - Remove nil condition of func Blockchain at `chain.go`
+  - func createBlock receives diff param at `block.go`
+  - Rename difficulty -> getDifficulty at `chain.go`
