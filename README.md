@@ -1012,3 +1012,15 @@ touch blockchain/transactions.go
   - change := total - amoun -> append to txOuts
   - append &TxOut{to, amount} to txOuts
 - Add struct addTxPayload, router transactions at `rest.go`
+
+## #10.7 Confirm Transactions (11:54)
+
+- Refactor Transactions to after block.mine() at `block.go`
+
+```go
+block.mine()
+block.Transactions = Mempool.TxToConfirm()
+```
+
+- Add func TxToConfirm at `transactions.go`
+- Duplication bug: we should check if the coin of txOut was already used or not
