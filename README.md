@@ -1057,3 +1057,10 @@ Amount int
   - In all inputs, if address equal to the owner, append TxId to creatorTxs
   - In all outputs, if address is equal to the owner and TxId is `not` in creatorTxs, append to uTxOuts
 - Refactor Tx.Id, getId => `ID` at `transactions.go`
+
+## 10.10 makeTx part Two (10:04)
+
+- Impl makeTx at `transactions.go`
+- But, It stil copy the coin if the Tx is on mempool
+  - it checkes spent or unspent only (confirmed)
+  - Should check unconfirmed Tx too.
