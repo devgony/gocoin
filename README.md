@@ -934,3 +934,18 @@ func (b *blockchain) difficulty() int {
 	}
 }
 ```
+
+## 9.4 Difficulty part Two (11:56)
+
+- Add const blockInterval, allowedRange at `chain.go`
+- Whenever create new block, `b.CurrentDifficulty = block.Difficulty`
+- Adjust allowedRange rather than constant value
+
+```go
+if actualTime <= (expectedTime - allowedRange) {
+	return b.CurrentDifficulty + 1
+} else if actualTime >= (expectedTime + allowedRange) {
+	return b.CurrentDifficulty - 1
+}
+return b.CurrentDifficulty
+```
