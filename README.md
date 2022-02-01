@@ -1024,3 +1024,29 @@ block.Transactions = Mempool.TxToConfirm()
 
 - Add func TxToConfirm at `transactions.go`
 - Duplication bug: we should check if the coin of txOut was already used or not
+
+## 10.8 uTxOuts (12:02)
+
+- We need to find which one is duplicated
+
+```
+Tx1
+	TxIns[COINBASE]
+	TxOuts[$5(you)] <- Spent TxOut
+Tx2
+	TxIns[Tx1.TxOuts[0]]
+	TxOuts[$5(me)] <- unspent TxOut to Spent
+Tx3
+	TxIns[Tx2.TxOuts[0]]
+	TxOuts[$3(you), $2(me)] <- uTxOut * 2
+```
+
+- Modify and Add struct TxIn, UTxOut at `transactions.go` with
+
+```go
+TxID   string
+Index  int
+Amount int
+```
+
+- Remove func txOuts, Rename TxOutsByAddress to UTxOutsByAddress at `chain.go`
