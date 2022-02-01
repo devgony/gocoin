@@ -992,3 +992,8 @@ touch blockchain/transactions.go
 
 - Add func txOuts, TxOutsByAddress, BalanceByAddress at `chain.go`
 - Add struct balanceResponse, func balance, router balance at `rest.go`
+
+## 10.4 Mempool (04:28)
+
+- Memory pool: where we put unconfirmed transaction
+- After confirmed -> Part of Block
