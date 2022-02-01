@@ -1071,3 +1071,46 @@ Amount int
 - Add !isOnMempool condition to UTxOutsByAddress at `chain.go`
 - looks like working but why error message is "not enough funds" not "not enough money"?
   - does rest.go convert error automatically?
+
+## 10.12 Refactoring (16:46)
+
+### Refactor redundant loop
+
+1. return true to kill func way
+
+```go
+func isOnMempool(uTxOut *UTxOut) bool {
+	for _, tx := range Mempool.Txs {
+		for _, input := range tx.TxIns {
+			if input.TxID == uTxOut.TxID && input.Index == uTxOut.Index {
+				return true
+			}
+		}
+	}
+	return false
+}
+```
+
+2. break Outer labeled loop way
+
+```go
+func isOnMempool(uTxOut *UTxOut) bool {
+	exists := false
+Outer:
+	for _, tx := range Mempool.Txs {
+		for _, input := range tx.TxIns {
+			if input.TxID == uTxOut.TxID && input.Index == uTxOut.Index {
+				exists = true
+				break Outer
+			}
+		}
+	}
+	return exists
+}
+```
+
+### Method Vs Function
+
+- If it is mutating struct -> `method`
+- Else, -> normal `func` with struct as input param
+- Sort method first, func last

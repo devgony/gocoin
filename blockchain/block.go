@@ -10,8 +10,6 @@ import (
 	"github.com/devgony/nomadcoin/utils"
 )
 
-const difficulty int = 2
-
 type Block struct {
 	Hash         string `json:"hash"`
 	PrevHash     string `json:"prevHash,omitempty"`
@@ -62,7 +60,7 @@ func createBlock(prevHash string, height int) *Block {
 		Hash:       "",
 		PrevHash:   prevHash,
 		Height:     height,
-		Difficulty: Blockchain().difficulty(),
+		Difficulty: difficulty(Blockchain()),
 		Nonce:      0,
 	}
 	block.mine()
