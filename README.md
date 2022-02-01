@@ -963,3 +963,17 @@ return b.CurrentDifficulty
 - Course ~#9 were all about Protecting Data
 - Here going to learn Moving value between our user
 - uTxOut: Unspent Transaction Output mpdel?
+
+## 10.1 Introduction to Transactions (07:01)
+
+- Tx
+  - TxIn[$5(me)]: money that i have
+  - TxOut[$0(me), $5(you)]: money that every body has by the end of Tx
+  - Just change owner
+- What if currency scale is different? change?
+  - TxIn[$10(me)]
+  - TxOut[$5(me), $5(you)]
+- Just find last Tx
+- Coinbase input: created by blockchain, to miner
+  - TxIn[$10(blockchain)]
+  - TxOut[$10(miner)]
