@@ -1003,3 +1003,12 @@ touch blockchain/transactions.go
 - Cuz Mempool is on the memory, we don't need to initialize
 - Add struct mempool, var Mempool, func makeTx, AddTx at `transactions.go`
 - Add router mempool at `rest.go`
+
+## 10.6 makeTx (11:33)
+
+- Improve func maskTx at `transactions.go`:
+  - BalanceByAddress < amount -> error
+  - Until total >= mount, append &TxIn{txOut.Owner, txOut.Amount} to txIns
+  - change := total - amoun -> append to txOuts
+  - append &TxOut{to, amount} to txOuts
+- Add struct addTxPayload, router transactions at `rest.go`
