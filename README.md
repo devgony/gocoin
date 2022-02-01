@@ -987,3 +987,8 @@ touch blockchain/transactions.go
 - Add struct Tx, TxIn, TxOut, func makeCoinbaseTx at `transactions.go`
 - Remove Data, Add Transaction to struct Block at `block.go`
 - Refactor to remove Data at `rest.go, explorer.go, block.go, chain.go`
+
+## 10.3 Balances (13:30)
+
+- Add func txOuts, TxOutsByAddress, BalanceByAddress at `chain.go`
+- Add struct balanceResponse, func balance, router balance at `rest.go`
