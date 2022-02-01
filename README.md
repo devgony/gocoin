@@ -955,3 +955,11 @@ return b.CurrentDifficulty
 - Add status route at `rest.go`
 - Refactor Handling errors for encoder at `rest.go`
 - Cheack status of difficulty grows each 5 blocks
+
+# 10 TRANSACTIONS
+
+## 10.0 Introduction (04:37)
+
+- Course ~#9 were all about Protecting Data
+- Here going to learn Moving value between our user
+- uTxOut: Unspent Transaction Output mpdel?
