@@ -1064,3 +1064,10 @@ Amount int
 - But, It stil copy the coin if the Tx is on mempool
   - it checkes spent or unspent only (confirmed)
   - Should check unconfirmed Tx too.
+
+## 10.11 isOnMempool (06:55)
+
+- Impl func isOnMempool at `transactions.go`
+- Add !isOnMempool condition to UTxOutsByAddress at `chain.go`
+- looks like working but why error message is "not enough funds" not "not enough money"?
+  - does rest.go convert error automatically?

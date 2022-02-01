@@ -1,7 +1,6 @@
 package blockchain
 
 import (
-	"fmt"
 	"sync"
 
 	"github.com/devgony/nomadcoin/db"
@@ -93,7 +92,10 @@ func (b *blockchain) UTxOutsByAddress(address string) []*UTxOut {
 			for index, output := range tx.TxOuts {
 				if output.Owner == address {
 					if _, ok := creatorTxs[tx.ID]; !ok {
-						uTxOuts = append(uTxOuts, &UTxOut{tx.ID, index, output.Amount})
+						uTxOut := &UTxOut{tx.ID, index, output.Amount}
+						if !isOnMempool(uTxOut) {
+							uTxOuts = append(uTxOuts, uTxOut)
+						}
 					}
 				}
 			}
@@ -119,11 +121,10 @@ func Blockchain() *blockchain {
 			if checkpoint == nil {
 				b.AddBlock()
 			} else {
-				fmt.Println("Restoring...")
+				// fmt.Println("Restoring...")
 				b.restore(checkpoint)
 			}
 		})
 	}
-	fmt.Println(b.NewestHash)
 	return b
 }
