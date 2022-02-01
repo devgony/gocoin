@@ -949,3 +949,9 @@ if actualTime <= (expectedTime - allowedRange) {
 }
 return b.CurrentDifficulty
 ```
+
+## 9.5 Conclusions (06:28)
+
+- Add status route at `rest.go`
+- Refactor Handling errors for encoder at `rest.go`
+- Cheack status of difficulty grows each 5 blocks
