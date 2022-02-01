@@ -1050,3 +1050,10 @@ Amount int
 ```
 
 - Remove func txOuts, Rename TxOutsByAddress to UTxOutsByAddress at `chain.go`
+
+## 10.9 UTxOutsByAddress (10:37)
+
+- Implement UTxOutsByAddress at `chain.go`
+  - In all inputs, if address equal to the owner, append TxId to creatorTxs
+  - In all outputs, if address is equal to the owner and TxId is `not` in creatorTxs, append to uTxOuts
+- Refactor Tx.Id, getId => `ID` at `transactions.go`
