@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/ecdsa"
 	"crypto/x509"
 	"encoding/hex"
 	"fmt"
@@ -22,9 +23,8 @@ func main() {
 	privByte, err := hex.DecodeString(privateKey)
 	utils.HandleErr(err)
 
-	restoredKey, err := x509.ParseECPrivateKey(privByte)
+	privateKey, err := x509.ParseECPrivateKey(privByte)
 	utils.HandleErr(err)
-	fmt.Println(restoredKey)
 
 	sigBytes, err := hex.DecodeString(signature)
 
@@ -34,5 +34,10 @@ func main() {
 	var bigR, bigS = big.Int{}, big.Int{}
 	bigR.SetBytes(rBytes)
 	bigS.SetBytes(sBytes)
+
+	hashBytes, err := hex.DecodeString(hashedMessage)
+	utils.HandleErr(err)
+	ok := ecdsa.Verify(&privateKey.PublicKey, hashBytes, &bigR, &bigS)
+	fmt.Println(ok)
 
 }
