@@ -1137,3 +1137,30 @@ Outer:
 mkdir wallet
 touch wallet/wallet.go
 ```
+
+## 11.1 Private and Public Keys (08:26)
+
+1. Hash the msg
+
+```go
+"i love you" -> hash(x) -> "hashed_message"
+```
+
+2. Generate key pair
+
+```go
+keypair (privateKey, publicKey)
+	(save privateK to a file -> wallet)
+```
+
+3. Sign the hash
+
+```go
+("hashed_message" + privateKey) -> "signature"
+```
+
+4. Verify with publicKey
+
+```go
+("hashed_message" + "signature" + publicKey) -> true / false
+```
