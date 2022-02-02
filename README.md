@@ -1274,3 +1274,8 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 	return
 }
 ```
+
+## 11.8 Addresses (09:20)
+
+- Add func aFromK, sign at `wallet.go`
+- Replace `"nico"` to `wallet.Wallet().Address` at `transactions.go`
