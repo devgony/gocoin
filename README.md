@@ -1164,3 +1164,13 @@ keypair (privateKey, publicKey)
 ```go
 ("hashed_message" + "signature" + publicKey) -> true / false
 ```
+
+## 11.2 Signing Messages (10:25)
+
+- ecdsa: Elliptic Curve Digital Signature Algorithm
+
+```go
+privateKey = ecdsa.GenerateKey
+hashAsBytes = hex.DecodeString(Hash(message))
+r, s = ecdsa.Sign
+```
