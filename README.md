@@ -1236,3 +1236,26 @@ fmt.Println(ok)
 
 - Add func hasWalletFile at `wallet.go`
 - Singletone pattern func Wallet skeleton at `wallet.go`
+
+## 11.6 Persit Wallet (09:16)
+
+- Add func createPrivKey, persistKey at `wallet.go`
+- If there is new var togather, we can recreate err with `newVar err :=`
+  - (actually updating)
+
+1. pure update way
+
+```go
+bytes, err := x509.MarshalECPrivateKey(key)
+utils.HandleErr(err)
+err = os.WriteFile(fileName, bytes, 0644)
+...
+```
+
+2. recreate way
+
+```go
+bytes, err := x509.MarshalECPrivateKey(key)
+utils.HandleErr(err)
+newVar2, err := os.WriteFile(fileName, bytes, 0644)
+```

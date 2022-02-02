@@ -1,13 +1,7 @@
 package main
 
 import (
-	"crypto/ecdsa"
-	"crypto/x509"
-	"encoding/hex"
-	"fmt"
-	"math/big"
-
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/nomadcoin/wallet"
 )
 
 const (
@@ -20,24 +14,5 @@ func main() {
 	// defer db.Close()
 	// blockchain.Blockchain()
 	// cli.Start()
-	privByte, err := hex.DecodeString(privateKey)
-	utils.HandleErr(err)
-
-	privateKey, err := x509.ParseECPrivateKey(privByte)
-	utils.HandleErr(err)
-
-	sigBytes, err := hex.DecodeString(signature)
-
-	rBytes := sigBytes[:len(sigBytes)/2]
-	sBytes := sigBytes[len(sigBytes)/2:]
-
-	var bigR, bigS = big.Int{}, big.Int{}
-	bigR.SetBytes(rBytes)
-	bigS.SetBytes(sBytes)
-
-	hashBytes, err := hex.DecodeString(hashedMessage)
-	utils.HandleErr(err)
-	ok := ecdsa.Verify(&privateKey.PublicKey, hashBytes, &bigR, &bigS)
-	fmt.Println(ok)
-
+	wallet.Wallet()
 }
