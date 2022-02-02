@@ -1259,3 +1259,18 @@ bytes, err := x509.MarshalECPrivateKey(key)
 utils.HandleErr(err)
 newVar2, err := os.WriteFile(fileName, bytes, 0644)
 ```
+
+## 11.7 Restore Wallet (09:15)
+
+- Add func restoreKey at `wallet.go`
+- Names return: good for short func, easy to understand only with signature, bad for long function's retunry `empty` and lookup above again
+
+```go
+func restoreKey() (key *ecdsa.PrivateKey ){
+	keyAsBytes, err := os.ReadFile(fileName)
+	utils.HandleErr(err)
+	key, err = x509.ParseECPrivateKey(keyAsBytes)
+	utils.HandleErr(err)
+	return
+}
+```
