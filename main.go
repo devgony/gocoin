@@ -1,12 +1,10 @@
 package main
 
 import (
-	"crypto/ecdsa"
-	"crypto/elliptic"
-	"crypto/rand"
 	"crypto/x509"
 	"encoding/hex"
 	"fmt"
+	"math/big"
 
 	"github.com/devgony/nomadcoin/utils"
 )
@@ -21,22 +19,20 @@ func main() {
 	// defer db.Close()
 	// blockchain.Blockchain()
 	// cli.Start()
-	privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
-	keyAsBytes, err := x509.MarshalECPrivateKey(privateKey)
+	privByte, err := hex.DecodeString(privateKey)
 	utils.HandleErr(err)
-	fmt.Printf("privateKey = %x\n\n", keyAsBytes)
 
-	message := "i love you"
-	hashedMessage := utils.Hash(message)
-	fmt.Printf("hashedMessage = %s\n\n", hashedMessage)
-
-	hashAsBytes, err := hex.DecodeString(hashedMessage)
+	restoredKey, err := x509.ParseECPrivateKey(privByte)
 	utils.HandleErr(err)
-	r, s, err := ecdsa.Sign(rand.Reader, privateKey, hashAsBytes)
-	signature := append(r.Bytes(), s.Bytes()...)
-	fmt.Printf("signature = %x\n\n", signature)
+	fmt.Println(restoredKey)
 
-	utils.HandleErr(err)
-	ok := ecdsa.Verify(&privateKey.PublicKey, hashAsBytes, r, s)
-	fmt.Println(ok)
+	sigBytes, err := hex.DecodeString(signature)
+
+	rBytes := sigBytes[:len(sigBytes)/2]
+	sBytes := sigBytes[len(sigBytes)/2:]
+
+	var bigR, bigS = big.Int{}, big.Int{}
+	bigR.SetBytes(rBytes)
+	bigS.SetBytes(sBytes)
+
 }

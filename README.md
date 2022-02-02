@@ -1207,3 +1207,22 @@ const (
 	signature     string = "6d56582490ff9a54b44df6bf9fa991c0432f2fd25f32760bf540b10049b50a048ca986d7e9f0ee7745bce735dcd0db951f21664f054e94b0a03d87046857a3ca"
 )
 ```
+
+## 11.4 Restoring (12:26)
+
+```go
+privByte, err := hex.DecodeString(privateKey)
+utils.HandleErr(err)
+
+restoredKey, err := x509.ParseECPrivateKey(privByte)
+utils.HandleErr(err)
+
+sigBytes, err := hex.DecodeString(signature)
+
+rBytes := sigBytes[:len(sigBytes)/2]
+sBytes := sigBytes[len(sigBytes)/2:]
+
+var bigR, bigS = big.Int{}, big.Int{}
+bigR.SetBytes(rBytes)
+bigS.SetBytes(sBytes)
+```
