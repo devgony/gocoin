@@ -1123,3 +1123,17 @@ Outer:
   - Remove nil condition of func Blockchain at `chain.go`
   - func createBlock receives diff param at `block.go`
   - Rename difficulty -> getDifficulty at `chain.go`
+
+## 11.0 Introduction (04:50)
+
+- If he owns unspent output
+- If he approved the transaction
+
+1. How signature, verification works
+2. Persistance to db
+3. Impl signature, verification with tracsaction
+
+```sh
+mkdir wallet
+touch wallet/wallet.go
+```
