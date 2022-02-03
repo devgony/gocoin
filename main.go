@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/devgony/nomadcoin/wallet"
+	"github.com/devgony/nomadcoin/cli"
+	"github.com/devgony/nomadcoin/db"
 )
 
 const (
@@ -11,8 +12,8 @@ const (
 )
 
 func main() {
-	// defer db.Close()
+	defer db.Close()
 	// blockchain.Blockchain()
-	// cli.Start()
-	wallet.Wallet()
+	cli.Start()
+	// wallet.Wallet()
 }

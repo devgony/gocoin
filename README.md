@@ -1324,3 +1324,27 @@ input.Onwer == address
 ```go
 if FindTx(b, input.TxID).TxOuts[input.Index].Address == address
 ```
+
+## 11.13 Conclusions (06:58)
+
+### `rest.go`
+
+#### Add router `wallet`
+
+#### Add func myWallet with Anonymous struct
+
+```go
+func myWallet(rw http.ResponseWriter, r *http.Request) {
+	address := wallet.Wallet().Address
+	json.NewEncoder(rw).Encode(struct {
+		Address string `json:"address"`
+	}{Address: address})
+
+}
+```
+
+### Q
+
+- Don't we need to use address when we send coin instead of name?
+- Study more (signature - address - name) relationship
+- How to filter mempool-ed Tx?

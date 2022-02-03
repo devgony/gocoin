@@ -14,13 +14,17 @@ http://localhost:4000/blocks/e829d8074402cfb78e5fb1ba407745ca7ffd3f1a55566dc5543
 ###
 http://localhost:4000/balance/nico
 ###
-http://localhost:4000/balance/henry
+http://localhost:4000/balance/unknown
+###
+http://localhost:4000/wallet
+###
+http://localhost:4000/balance/b9341a8bb193092b6c5b2434746456c9046f95cc91cd753fc168f1d1a007edc63baa803fbd171c2d1ea9d731a34e682db12a0f70a4d58fa5e96048814c17690e
 ###
 POST http://localhost:4000/transactions
 
 {
-    "to": "henry",
-    "amount": 30
+    "to": "unknown",
+    "amount": 40
 }
 ###
 http://localhost:4000/mempool 
