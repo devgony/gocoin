@@ -1279,3 +1279,8 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 
 - Add func aFromK, sign at `wallet.go`
 - Replace `"nico"` to `wallet.Wallet().Address` at `transactions.go`
+
+## 11.9 Verification Function (11:24)
+
+- Add func restoreBigInts, verify at `wallet.go`
+- restoreBigints can handle signature, address(to publicKey)
