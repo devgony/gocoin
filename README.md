@@ -1284,3 +1284,8 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 
 - Add func restoreBigInts, verify at `wallet.go`
 - restoreBigints can handle signature, address(to publicKey)
+
+## 11.10 Recap (08:56)
+
+- Add func encodeBigInts at `wallet.go`
+- Refactor with encodeBigInts
