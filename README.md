@@ -1289,3 +1289,9 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 
 - Add func encodeBigInts at `wallet.go`
 - Refactor with encodeBigInts
+
+## 11.11 Transaction Signing (11:01)
+
+- Add func Txs, FindTx at `chain.go`
+- Rename TxIn.Owner -> Signature, TxOut.Owner -> Address at `transactions.go`
+- Add func sign at `transactions.go`
