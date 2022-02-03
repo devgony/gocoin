@@ -1295,3 +1295,32 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 - Add func Txs, FindTx at `chain.go`
 - Rename TxIn.Owner -> Signature, TxOut.Owner -> Address at `transactions.go`
 - Add func sign at `transactions.go`
+
+## 11.12 Transaction Verification (16:36)
+
+### `transactions.go`
+
+#### Impl func `validate`
+
+- To validate New Tx(in),
+  - Find prev Txout referencing same TxID with New Tx
+  - Check if address is same (same owner)
+  - Verify signature created by private key of the owner
+
+#### Modify func `makeT`
+
+- check valid, return ErrorNotValid
+
+### `chain.go`
+
+#### Modify func `UTxOutsByAddress`
+
+```go
+input.Onwer == address
+```
+
+⬇️
+
+```go
+if FindTx(b, input.TxID).TxOuts[input.Index].Address == address
+```
