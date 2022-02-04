@@ -1565,3 +1565,20 @@ touch p2p/peer.go
 ### `p2p/p2p.go`
 
 - Add conn.WriteMessage at func `Upgrade`
+
+## 12.14 Inbox (08:30)
+
+- Instead of writing once, use coroutine and channel
+
+### `p2p/peer.go`
+
+- Add method `write`
+
+#### func `initPeer`
+
+- make channel initiating peer
+- go p.write()
+
+### `p2p/p2p.go`
+
+- send message to inbox(channel)
