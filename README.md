@@ -1554,3 +1554,14 @@ touch p2p/peer.go
 ### `p2p.go`
 
 - Refactor with utils.Splitter
+
+## #12.13 Read Peer (11:06)
+
+### `p2p/peer.go`
+
+- Add method read
+- Add go p.read() at func `initPeer`
+
+### `p2p/p2p.go`
+
+- Add conn.WriteMessage at func `Upgrade`
