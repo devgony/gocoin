@@ -1433,7 +1433,36 @@ func main() {
 ## 12.4 Buffered Channels (14:29)
 
 ```go
-c := make(chan int, N)
+c := make(chan int, NumOfBuffer)
 ```
 
 - Don't block first N values, then block/wait the queue like normal Unbuffered channel
+
+## 12.5 WebSocket Upgrades (11:47)
+
+- HTTP: stateless
+- WS: statefull, connected
+- Upgrade Go with WS
+
+```sh
+mkdir p2p
+touch p2p/p2p.go
+touch chat.html
+go get github.com/gorilla/websocket
+go run -race main.go run -mode=rest -port=3000
+```
+
+### `chat.html`
+
+```html
+const socket = new WebSocket("ws://localhost:4000/ws");
+```
+
+### `p2p/p2p.go`
+
+- Add func Upgrade
+
+### `rest/rest.go`
+
+- Add ws to URL, router
+- Add func loggerMiddleware
