@@ -1486,3 +1486,17 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 ### `p2p/p2p.go`
 
 - Add conn.WriteMessage
+
+## 12.8 Connections (13:02)
+
+- Connect client to client through server
+- http.ListenAndServe uses goroutine
+
+### `p2p/p2p.go`
+
+- Add slice of conn, append conn, send to other conns,
+
+### To-do
+
+- If browser is refreshed, gets error -> How to handle closed connection?
+- A Message should not block others -> How to separate?
