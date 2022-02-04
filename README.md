@@ -1582,3 +1582,15 @@ touch p2p/peer.go
 ### `p2p/p2p.go`
 
 - send message to inbox(channel)
+
+## 12.15 Cleanup (09:57)
+
+### `p2p/p2p.go`
+
+- Delete Hellos, Add `initPeer()`
+
+### `p2p/peer.go`
+
+- Add key, address, port to struct peer
+- Add func `close`
+- Add defer p.close() at `read`, `write`
