@@ -1429,3 +1429,11 @@ func main() {
 	receive(c)
 }
 ```
+
+## 12.4 Buffered Channels (14:29)
+
+```go
+c := make(chan int, N)
+```
+
+- Don't block first N values, then block/wait the queue like normal Unbuffered channel
