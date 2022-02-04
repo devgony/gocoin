@@ -1466,3 +1466,13 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 
 - Add ws to URL, router
 - Add func loggerMiddleware
+
+## 12.6 ReadMessage (13:18)
+
+### `p2p/p2p.go`
+
+#### func `Upgrade`
+
+- Add CheckOrigin
+- Add conn.ReadMessage with for loop
+  - conn.ReadMessage is a receiver Channel for socket
