@@ -1393,3 +1393,25 @@ TxIn.Sign + TxOut1.Address -> true / false
 ```go
 go countToTen()
 ```
+
+## 12.2 Channels (16:07)
+
+### Channels
+
+- Deadlock: Channel should not receive more than coroutine
+
+```go
+func countToTen(c chan int) {
+	for i := range [10]int{} {
+		c <- i
+		time.sleep(1 * time.Second)
+	}
+}
+
+func main() {
+	c := make(chan int)
+	go countToTen(c)
+	a := <- c // blocking by getting next value
+	fmt.Println(a)
+}
+```
