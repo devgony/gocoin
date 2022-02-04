@@ -1500,3 +1500,15 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 
 - If browser is refreshed, gets error -> How to handle closed connection?
 - A Message should not block others -> How to separate?
+
+## 12.9 Peers (17:51)
+
+- Should connect peer and peer not through server
+
+### `p2p/p2p.go`
+
+- Add func `AddPeer`
+
+### `rest.go`
+
+- Add struct addPeerPayload, func peers, router peers
