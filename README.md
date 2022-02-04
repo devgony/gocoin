@@ -1512,3 +1512,17 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 ### `rest.go`
 
 - Add struct addPeerPayload, func peers, router peers
+
+## 12.10 initPeer (10:29)
+
+### `p2p/peer.go`
+
+```sh
+touch p2p/peer.go
+```
+
+- Add struct `peer`, func `initPeer`
+
+### `rest.go`
+
+- Add GET to router peers
