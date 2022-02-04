@@ -1400,18 +1400,32 @@ go countToTen()
 
 - Deadlock: Channel should not receive more than coroutine
 
+## 12.3 Raead, Receive and Close (11:00)
+
 ```go
-func countToTen(c chan int) {
+func countToTen(c chan<- int) { // send only chan<-
 	for i := range [10]int{} {
+		time.Sleep(1 * time.Second)
+		fmt.Printf("sending %d\n", i)
 		c <- i
-		time.sleep(1 * time.Second)
+	}
+	close(c)
+}
+
+func receive(c <-chan int) { // receive only <-chan
+	for {
+		a, ok := <-c // blocking by getting next value
+		if !ok {
+			fmt.Println("Done")
+			break
+		}
+		fmt.Printf("received %d\n", a)
 	}
 }
 
 func main() {
 	c := make(chan int)
 	go countToTen(c)
-	a := <- c // blocking by getting next value
-	fmt.Println(a)
+	receive(c)
 }
 ```
