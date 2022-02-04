@@ -1526,3 +1526,21 @@ touch p2p/peer.go
 ### `rest.go`
 
 - Add GET to router peers
+
+## 12.11 openPort (10:46)
+
+### `p2p/p2p.go`
+
+#### func AddPeer
+
+- send openPort with URL
+
+#### func Upgrade
+
+- get openPort from URL
+
+### `rest.go`
+
+#### func peers
+
+- p2p.Addpeer(..., port)
