@@ -1544,3 +1544,13 @@ touch p2p/peer.go
 #### func peers
 
 - p2p.Addpeer(..., port)
+
+## 12.12 Recap (14:24)
+
+### `utils.go`
+
+- Add func Spliiter
+
+### `p2p.go`
+
+- Refactor with utils.Splitter
