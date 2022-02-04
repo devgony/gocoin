@@ -1363,3 +1363,33 @@ json.NewEncoder(rw).Encode(errorResponse{err.Error()})
 ```
 
 - return to finish function
+
+### Recap
+
+```
+(TxOut1(publickKey), TxOut2)
+
+Tx
+	TxIn[
+		(TxOut1)
+		(TxOut2)
+	]
+	Sign with my privateKey
+
+TxIn.Sign + TxOut1.Address -> true / false
+```
+
+## 12.0 Introduction (05:55)
+
+- Lean Peer To Peer by simple Chatting app
+
+## 12.1 Why Go Routines (09:44)
+
+### Goroutine
+
+- Running function at separate parallel dimension
+- Can't assign or return value to variable immediately;
+
+```go
+go countToTen()
+```
