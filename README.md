@@ -1348,3 +1348,18 @@ func myWallet(rw http.ResponseWriter, r *http.Request) {
 - Don't we need to use address when we send coin instead of name?
 - Study more (signature - address - name) relationship
 - How to filter mempool-ed Tx?
+
+## 11.14 Recap (10:16)
+
+### `rest.go`
+
+#### func transactions: Superfluous response.WriteHeader error
+
+- Should return http.StatusBadRequest(404)
+- Should use err.Error() to convey original error instead of literal error
+
+```go
+json.NewEncoder(rw).Encode(errorResponse{err.Error()})
+```
+
+- return to finish function
