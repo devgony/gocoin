@@ -1675,3 +1675,43 @@ func (p *peer) close() {
 	delete(Peers.v, p.key)
 }
 ```
+
+## 12.19 Messages (13:41)
+
+### Messaging Scenario
+
+#### Behind case
+
+1. :4000 sends newest block to :3000
+2. :3000 realizes that :3000 is behind, ask to :4000 latest all blocks
+3. :4000 gives latest all blocks
+
+#### Ahead case
+
+1. :4000 sends newest block to :3000
+2. :3000 realizes that :3000 is ahead, send newest block to :4000
+3. :4000 realizes that :4000 is behind, ask to :3000 latest all blocks
+4. :3000 gives latest all blocks
+
+### `p2p/messages.go`
+
+```sh
+touch p2p/messages.go
+```
+
+### `iota`
+
+- Auto increament sequence
+
+```go
+const (
+	MessageNewestBlock MessageKind = iota
+	MessageAllBlocksRequest
+	MessageAllBlocksResponse
+)
+```
+
+### `p2p/peer.go`
+
+- Let's Communicate with json
+- Change from `ReadMessage` to `ReadJSON`
