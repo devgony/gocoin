@@ -1726,3 +1726,18 @@ const (
 ### `p2p/p2p.go`
 
 - sendNewstBlock in addPeer
+
+## 12.22 Handle Message (09:50)
+
+### `utils.go`
+
+- Add func ToJSON
+
+### `p2p/messages.go`
+
+- Add func handleMsg with Unmarshal
+- Remove func addPayload, Use ToJSON instead.
+
+### `p2p/peer.go`
+
+- handleMsg whenever read()
