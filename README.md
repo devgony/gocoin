@@ -1715,3 +1715,14 @@ const (
 
 - Let's Communicate with json
 - Change from `ReadMessage` to `ReadJSON`
+
+## 12.20 Newest Block (11:31)
+
+### `p2p/messages.go`
+
+- Add func addPayload, makeMessage, sendNewestBlock
+- Why should we json.Marshal twice?
+
+### `p2p/p2p.go`
+
+- sendNewstBlock in addPeer
