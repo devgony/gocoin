@@ -1594,3 +1594,20 @@ touch p2p/peer.go
 - Add key, address, port to struct peer
 - Add func `close`
 - Add defer p.close() at `read`, `write`
+
+## 12.16 Data Race (12:39)
+
+- Stable bolt has socket hangs up error with race
+- Change to bbolt
+
+```sh
+go get go.etcd.io/bbolt
+```
+
+```go
+// db.go
+import (bolt "go.etcd.io/bbolt")
+```
+
+- Data Race: When more than two goroutine access to the same block
+- When we read and modify peers at the same time, gets Data race error
