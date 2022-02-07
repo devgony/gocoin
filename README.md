@@ -1658,3 +1658,20 @@ func (p *peer) close() {
 	...
 ]
 ```
+
+## 12.18 Demonstration (08:44)
+
+- Can use func with defer to delay between lock and unlock
+  - -> Can Demonstrate the mutex
+
+```go
+func (p *peer) close() {
+	Peers.m.Lock()
+	defer func() {
+		time.Sleep((20 * time.Second))
+		Peers.m.Unlock()
+	}()
+	p.conn.Close()
+	delete(Peers.v, p.key)
+}
+```
