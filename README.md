@@ -1611,3 +1611,50 @@ import (bolt "go.etcd.io/bbolt")
 
 - Data Race: When more than two goroutine access to the same block
 - When we read and modify peers at the same time, gets Data race error
+
+## 12.17 Mutex (13:44)
+
+### `p2p/peer.go`
+
+- Add type peers with `sync.Mutex`
+
+```go
+type peers struct {
+	v map[string]*peer
+	m sync.Mutex
+}
+
+var Peers peers = peers{
+	v: make(map[string]*peer),
+}
+```
+
+- Should lock before read of delete
+
+```go
+func (p *peer) close() {
+	Peers.m.Lock()
+	defer Peers.m.Unlock()
+	p.conn.Close()
+	delete(Peers.v, p.key)
+}
+```
+
+- Add func `AllPeers` and convert output from object to array of keys
+  - Cuz we don't modify peers but just read -> not method but func -> use getter
+
+```json
+{
+  "127.0.0.1:4000": {},
+  "...": {}
+}
+```
+
+⬇️
+
+```json
+[
+	"127.0.0.1:4000",
+	...
+]
+```
