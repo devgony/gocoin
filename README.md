@@ -1880,4 +1880,16 @@ const (
 
 - Add p2p.BroadcastNewTx(tx)
 
+## 12.30 Global Memory Pool (10:53)
+
 ### Todo: Not only mining but also broadcasting should empty mempool as well
+
+### `blockchain/transactions.go`
+
+- Change mempool.Txs from slice to map (similar with peer)
+  - nil should be empty map
+
+### `blockchain/chain.go/AddPeerBlock()`
+
+- Rename block -> newBlock
+- Add delete tx logic
