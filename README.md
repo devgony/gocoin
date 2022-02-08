@@ -1768,3 +1768,30 @@ const (
 - Add case `MessageAllBlocksRequest`, `MessageAllBlocksresponse`
 
 - Why don't we just get height with blockchain.Height?
+
+## 12.25 Recap (10:15)
+
+- Add console print
+
+### Case1
+
+1. 4000: wants to connect to port 3000
+2. 3000: 4000 wants an upgrade
+3. 4000: Sending newest block to 127.0.0.1:3000
+4. 3000: Received the newest block from 127.0.0.1:4000
+5. 4000: 127.0.0.1:3000 wants all the blocks.
+6. 3000: Received all the blocks from 127.0.0.1:4000
+
+### Case2
+
+- After mining blocks at 3000,
+
+1. 4000: wants to connect to port 3000
+2. 3000: 4000 wants an upgrade
+3. 4000: Sending newest block to 127.0.0.1:3000
+4. 3000: Received the newest block from 127.0.0.1:4000 // 3000 have more than 4000
+5. 3000: Sending newest block to 127.0.0.1:4000
+6. 4000: Received the newest block from 127.0.0.1:3000 // realize 4000 is behind 3000
+7. 4000: Requesting all blocks to 127.0.0.1:3000
+8. 3000: 127.0.0.1:4000 wants all the blocks.
+9. 4000: Received all the blocks from 127.0.0.1:3000
