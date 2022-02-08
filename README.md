@@ -1722,6 +1722,8 @@ const (
 
 - Add func addPayload, makeMessage, sendNewestBlock
 - Why should we json.Marshal twice?
+  - cuz Payload is public, it can be already JSON
+  - Both Payload and Message should be json.Marshal-ed
 
 ### `p2p/p2p.go`
 
@@ -1741,3 +1743,9 @@ const (
 ### `p2p/peer.go`
 
 - handleMsg whenever read()
+
+## 12.23 Recap (10:01)
+
+### `p2p/peer.go`
+
+- Datarace: Though there is lock at close(), opposite side stil add Peer twice -> Add Lock at initPeer
