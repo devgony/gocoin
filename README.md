@@ -1843,3 +1843,15 @@ const (
 
 - `/blocks`: after AddBlock, BroadcastNewBlock
 - `/status`: blockchain.Status
+
+## 12.28 AddPeerBlock (07:28)
+
+- Now connecting peers manually, right after mining, it broadcasts!
+
+### `blockchain/chain.go`
+
+- Add method AddPeerBlock
+
+### `p2p/messages.go`
+
+- MessageNewBlockNotify -> AddPeerBlock
