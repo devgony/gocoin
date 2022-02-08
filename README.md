@@ -1817,3 +1817,29 @@ const (
 ### `p2p/messages.go`
 
 - blockchain.Blockchain().Replace(payload) at the end of handleMsg
+
+## 12.27 Broadcast Block (11:29)
+
+### Solve datarace: cover blockchain with mutex
+
+#### `blockchain/chain.go`
+
+- Add m to struct blockchain
+- Lock & unlock at func Blocks, Status, Replace
+
+### Broadcast: send same msg to everybody
+
+#### `blockchain/chain.go`
+
+- func AddBlock returns newBlock
+- Add func Status: show status of blockchain at `/status`
+
+#### `p2p/messages.go`
+
+- Add iota MessageNewBlockNotify
+- Add func notifyNewBlock, BroadcastNewBlock
+
+#### `rest/rest.go`
+
+- `/blocks`: after AddBlock, BroadcastNewBlock
+- `/status`: blockchain.Status
