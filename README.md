@@ -1749,3 +1749,22 @@ const (
 ### `p2p/peer.go`
 
 - Datarace: Though there is lock at close(), opposite side stil add Peer twice -> Add Lock at initPeer
+
+## 12.24 All Blocks (14:19)
+
+### `db/db.go`
+
+- Each client should use different db
+- Add func getDbName: get db name with port number
+
+### `p2p/messages.go`
+
+- Add func requestAllBlocks, sendAllBlocks
+
+#### func `handleMsg`
+
+- if `payload.Height >= b.Height` requestAllBlocks()
+  - To handle case when height is equal, used some illgical trick
+- Add case `MessageAllBlocksRequest`, `MessageAllBlocksresponse`
+
+- Why don't we just get height with blockchain.Height?
