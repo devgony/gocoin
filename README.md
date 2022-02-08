@@ -1795,3 +1795,25 @@ const (
 7. 4000: Requesting all blocks to 127.0.0.1:3000
 8. 3000: 127.0.0.1:4000 wants all the blocks.
 9. 4000: Received all the blocks from 127.0.0.1:3000
+
+## 12.26 Replace Blockchain (10:59)
+
+- Can syncronize and persist now!
+
+### `/blockchain/block.go`
+
+- Rename method persist -> func persitBlock
+
+### `/blockchain/chain.go`
+
+- Add method Replace
+  - Renew blockchain
+  - EmptyBlocks and persist newBlocks
+
+### `db/db.go`
+
+- Add funcEmptyBlocks()
+
+### `p2p/messages.go`
+
+- blockchain.Blockchain().Replace(payload) at the end of handleMsg
