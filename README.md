@@ -1855,3 +1855,29 @@ const (
 ### `p2p/messages.go`
 
 - MessageNewBlockNotify -> AddPeerBlock
+
+## 12.29 Broadcast Transactions (14:45)
+
+- Now right after Tx, even mempool is synced!
+
+### `blockchain/transactions.go`
+
+- Add Mutex to mempool
+- Add memOnce to mempool to init
+- Add method AddPeerTx
+
+### `p2p/messages.go`
+
+- Add iota MessageNewTxNotify, func notifyNewTx, handleMsg case MessageNewTxNotify
+
+### `p2p/p2p.go`
+
+- Add func BroadcastNewTx
+
+### `rest/rest.go`
+
+#### `func transactions`
+
+- Add p2p.BroadcastNewTx(tx)
+
+### Todo: Not only mining but also broadcasting should empty mempool as well
