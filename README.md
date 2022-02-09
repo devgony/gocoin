@@ -1902,7 +1902,32 @@ const (
 
 - Add func broadcastNewPeer
 - If broadcast is true, broadcastNewPeer() at `AddPeer`
+- To AddPeer, we need to know previous openPort -> send it when broadcastNewPeer
 
 ### `p2p/messages.go`
 
 - Add iota MessageNewPeerNotify, func notifyNewPeer
+
+## 12.32 Network Accomplished (16:03)
+
+### `p2p/messages.go`
+
+- Split payload with `:`
+
+1. 2000: wants to connect to port 3000
+2. 3000: 2000 wants an upgrade
+3. 2000: wants to connect to port 4000
+4. 4000: 2000 wants an upgrade
+5. 4000: 3000 wants an upgrade
+6. 4000:
+   ```
+   Received the newest block from 127.0.0.1:3000
+   Requesting all blocks to 127.0.0.1:3000
+   Received all the blocks from 127.0.0.1:3000
+   ```
+7. 3000:
+   ```
+   3000 wants to connect to port 4000
+   Sending newest block to 127.0.0.1:4000
+   127.0.0.1:4000 wants all the blocks.
+   ```
