@@ -1893,3 +1893,16 @@ const (
 
 - Rename block -> newBlock
 - Add delete tx logic
+
+## 12.31 Broadcast New Peer (13:08)
+
+- If more than 3 peers, should inform there is new peer
+
+### `p2p/p2p.go`
+
+- Add func broadcastNewPeer
+- If broadcast is true, broadcastNewPeer() at `AddPeer`
+
+### `p2p/messages.go`
+
+- Add iota MessageNewPeerNotify, func notifyNewPeer
