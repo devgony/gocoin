@@ -1124,6 +1124,8 @@ Outer:
   - func createBlock receives diff param at `block.go`
   - Rename difficulty -> getDifficulty at `chain.go`
 
+# 11 WALLETS
+
 ## 11.0 Introduction (04:50)
 
 - If he owns unspent output
@@ -1378,6 +1380,8 @@ Tx
 
 TxIn.Sign + TxOut1.Address -> true / false
 ```
+
+# 12 P2P
 
 ## 12.0 Introduction (05:55)
 
@@ -1931,3 +1935,10 @@ const (
    Sending newest block to 127.0.0.1:4000
    127.0.0.1:4000 wants all the blocks.
    ```
+
+## 12.33 Recap (04:31)
+
+1. AddPeer(payload.Address, payload.Port, port[1:], true)
+2. broadcastNewPeer
+3. notifyNewPeer: broadcast `MessageNewPeerNotify` to all peers aside of newpeer
+4. if got `MessageNewPeerNotify`, AddPeer(.., false)
