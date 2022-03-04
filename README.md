@@ -1,6 +1,6 @@
 # 2. INTRODUCTION
 
-## 2.2 Why Go (06:17)
+## 2.2 Why Go
 
 - Only 1 option: for loop
 - Powerful standard library
@@ -8,16 +8,16 @@
 
 # 3. TOUR OF GO
 
-## 3.0 Creating the Project (04:30)
+## 3.0 Creating the Project
 
 ```sh
-go mod init github.com/devgony/nomadcoin
+go mod init github.com/devgony/gophercoin
 ls
 > go.mod # like package.json
 touch main.go
 ```
 
-## 3.1 Variables in Go (07:54)
+## 3.1 Variables in Go
 
 ### create and update var syntax (should be inside func only)
 
@@ -29,7 +29,7 @@ name := "henry" // same with above, syntax sugar
 - var, const
 - bool, string, int(8,16..64), uint(8,16..64) byte, float(32,64)
 
-## 3.2 Functions (08:59)
+## 3.2 Functions
 
 - If params have same type, specify only at the last
 - func can return two types
@@ -52,7 +52,7 @@ func plus(a ...int) int {
 }
 ```
 
-## 3.3 fmt (03:52)
+## 3.3 fmt
 
 ```go
 x := 84375983402
@@ -63,7 +63,7 @@ fmt.Printf("%x\n", x)
 fmt.Printf("%U\n", x)
 ```
 
-## 3.4 Slices and Arrays (08:02)
+## 3.4 Slices and Arrays
 
 - array is declarative and limited in go
 
@@ -83,7 +83,7 @@ foods = append(foods, "t") // returns appended slice (should set to var manually
 fmt.Printf("%v\n", foods)
 ```
 
-## 3.5 Pointers (08:44)
+## 3.5 Pointers
 
 ```go
 a := 2
@@ -93,7 +93,7 @@ a = 9
 fmt.Println(a, b, *c) // 9 2 9
 ```
 
-## 3.6 Structs (07:11)
+## 3.6 Structs
 
 ### struct (like class)
 
@@ -115,7 +115,7 @@ func (p person) sayHello() {
 }
 ```
 
-## 3.7 Structs with Pointers (09:35)
+## 3.7 Structs with Pointers
 
 ```sh
 mkdir person
@@ -152,11 +152,11 @@ func (p *Person) SetDetails(name string, age int) {
 
 # 4. BLOCKCHAIN
 
-## 4.0 Introduction (05:05)
+## 4.0 Introduction
 
 - Concentrate to blockchain concept, solve side problem later
 
-## 4.1 Our First Block (13:58)
+## 4.1 Our First Block
 
 - if any block is edited, invalid
 
@@ -176,7 +176,7 @@ genesisBlock.hash = hexHash
 secondBlocks := block{"Second Blocks", "", genesisBlock.hash}
 ```
 
-## 4.2 Our First Blockchain (09:43)
+## 4.2 Our First Blockchain
 
 ```go
 type block struct {
@@ -220,7 +220,7 @@ func main() {
 }
 ```
 
-## 4.3 Singleton Pattern (05:57)
+## 4.3 Singleton Pattern
 
 ```sh
 mkdir blockchain
@@ -253,7 +253,7 @@ func GetBlockchain() *blockchain {
 }
 ```
 
-## 4.4 Refactoring part One (09:16)
+## 4.4 Refactoring part One
 
 - Package sync.once: keep running once though ran by goroutine
 
@@ -266,7 +266,7 @@ once.Do(func() {
 
 - Blockchain should be a slice of pointer with borrow (it will be way longer)
 
-## 4.5 Refactoring part Two (07:15)
+## 4.5 Refactoring part Two
 
 ```go
 package blockchain
@@ -331,7 +331,7 @@ func (b *blockchain) AllBlocks() []*block {
 
 # 5. EXPLORER
 
-## 5.0 Setup (06:42)
+## 5.0 Setup
 
 - server side rendering only with std lib
 
@@ -349,7 +349,7 @@ func main() {
 }
 ```
 
-## 5.1 Rendering Templates (08:10)
+## 5.1 Rendering Templates
 
 ```sh
 mkdir templates
@@ -384,7 +384,7 @@ func home(rw http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## 5.2 Rendering Blocks (07:09)
+## 5.2 Rendering Blocks
 
 - install extension: `gotemplate-syntax`
 - mvp.css: https://andybrewer.github.io/mvp/
@@ -407,7 +407,7 @@ move templates/home.gohtml templates/pages/home.gohtml
 touch templates/pages/add.gohtml
 ```
 
-## 5.3 Using Partials (10:34)
+## 5.3 Using Partials
 
 ```sh
 touch partials/block.gohtml
@@ -427,7 +427,7 @@ templates = template.Must(template.ParseGlob(templateDir + "pages/*.gohtml"))
 templates = template.Must(templates.ParseGlob(templateDir + "partials/*.gohtml")) // template^s
 ```
 
-## 5.4 Adding A Block (14:44)
+## 5.4 Adding A Block
 
 ### Cursor synatax `.`: passing struct
 
@@ -469,7 +469,7 @@ func add(rw http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## 5.5 Refactoring (04:42)
+## 5.5 Refactoring
 
 ```sh
 mkdir explorer
@@ -484,7 +484,7 @@ cp main.go explorer/explorer.go
 
 # 6. REST API
 
-## 6.0 Setup (09:03)
+## 6.0 Setup
 
 - REST API
 
@@ -503,7 +503,7 @@ func HandleErr(err error) {
 
 - Marshal: convert from goInterface to JSON
 
-## 6.1 Marshal and Field Tags (11:18)
+## 6.1 Marshal and Field Tags
 
 - manual marshal
 
@@ -530,7 +530,7 @@ Payload     string `json:"payload,omitempty"` // omit if empty
 Payload:     "data:string", // write data on body
 ```
 
-## 6.2 MarshalText (13:38)
+## 6.2 MarshalText
 
 ### Interface
 
@@ -551,7 +551,7 @@ func (u URL) MarshalText() ([]byte, error) {
 }
 ```
 
-## 6.3 JSON Decode (14:00)
+## 6.3 JSON Decode
 
 - Install VSC extension: REST client
 
@@ -571,7 +571,7 @@ POST http://localhost:4000/blocks
 utils.HandleErr(json.NewDecoder(r.Body).Decode(&addBlockBody))
 ```
 
-## 6.4 NewServeMux (11:50)
+## 6.4 NewServeMux
 
 - quick refactoring
 
@@ -611,7 +611,7 @@ handler.HandleFunc("/blocks", blocks)
 log.Fatal(http.ListenAndServe(port, handler))
 ```
 
-## 6.5 Gorilla Mux (08:54)
+## 6.5 Gorilla Mux
 
 - can handle params
 
@@ -625,7 +625,7 @@ router := mux.NewRouter()
 vars := mux.Vars(r)
 ```
 
-## 6.6 Atoi (08:42)
+## 6.6 Atoi
 
 - string to int
 
@@ -633,7 +633,7 @@ vars := mux.Vars(r)
 id, err := strconv.Atoi(vars["height"])
 ```
 
-## 6.7 Error Handling (05:00)
+## 6.7 Error Handling
 
 - new error
 
@@ -649,7 +649,7 @@ type errorResponse struct {
 }
 ```
 
-## 6.8 Middlewares (10:01)
+## 6.8 Middlewares
 
 - Middleware is a function to call before final destination
 
@@ -667,7 +667,7 @@ type errorResponse struct {
 - flag
 - cobra
 
-## 7.1 Parsing Commands (05:52)
+## 7.1 Parsing Commands
 
 - os.Args gives array of commands
 
@@ -678,7 +678,7 @@ go run main.go someCMD
 
 - to exit, use `os.Exit(0)`
 
-## 7.2 FlagSet (10:26)
+## 7.2 FlagSet
 
 - flagSet is useful if one command has many flags
 
@@ -694,7 +694,7 @@ if rest.Parsed() {
 }
 ```
 
-## 7.3 Flag (10:08)
+## 7.3 Flag
 
 - easier than flagSet
 
@@ -715,13 +715,13 @@ echo "package main\nfunc main() {}" > main.go
 
 # 8. PERSISTENCE
 
-## 8.0 Introduction to Bolt (08:09)
+## 8.0 Introduction to Bolt
 
 - currently everthing is on memory (slice of block)
 - bolt: key/value database specified for get/set
   - eg) "sdkfljsdlfjds": {"data: PrvHash"}
 
-## 8.1 Creating the Database (11:47)
+## 8.1 Creating the Database
 
 - There will be no immediate `Start` so that start coding from `db/db.go`
 
@@ -757,7 +757,7 @@ func DB() *bolt.DB {
 }
 ```
 
-## 8.2 A New Blockchain (11:53)
+## 8.2 A New Blockchain
 
 - divide & conquer
 
@@ -766,7 +766,7 @@ mv blockchain/blockchain.go blockchain/chain.go
 touch blockchain/block.go
 ```
 
-## 8.3 Saving A Block (12:25)
+## 8.3 Saving A Block
 
 - gob: encode/decode data<->byte
 - buffer: place to put byte with write/read
@@ -800,7 +800,7 @@ func SaveBlock(hash string, data []byte) {
 }
 ```
 
-## 8.4 Persisting The Blockchain (10:55)
+## 8.4 Persisting The Blockchain
 
 - move ToBytes from `block.go` to `utils.go`
   - inferface -> can get any type
@@ -815,7 +815,7 @@ func ToBytes(i interface{}) []byte {
 }
 ```
 
-## 8.5 Restoring the Blockchain (12:28)
+## 8.5 Restoring the Blockchain
 
 - when we start, should restore chain from checkpoint
 - restore from byte to data
@@ -841,7 +841,7 @@ func Checkpoint() []byte {
 }
 ```
 
-## 8.6 Restoring Block (13:27)
+## 8.6 Restoring Block
 
 - Add func FromBytes at `utils.go`
 - Refactor func restore with func FromBytes at `chain.go`
@@ -849,7 +849,7 @@ func Checkpoint() []byte {
 - Add ErrNotFound, func restore, func FindBlock at `block.go`
 - Omit GET, POST case at `rest.go` for test
 
-## 8.7 All Blocks (10:51)
+## 8.7 All Blocks
 
 - Close at `db/db.go`
 - defer Close() at `main.go`
@@ -857,7 +857,7 @@ func Checkpoint() []byte {
 - Add func Blocks at `chain.go`
 - Recover GET, POST case at `rest.go`
 
-## 8.8 Recap (10:46)
+## 8.8 Recap
 
 - Refactor SaveBlockchain -> SaveCheckpoint
 - bolt, get/set data to bucket
@@ -866,7 +866,7 @@ func Checkpoint() []byte {
 
 # 9 MINING
 
-## 9.0 Introduction to PoW (06:28)
+## 9.0 Introduction to PoW
 
 - Proof Of Work
 - Add properties to Block struct at `block.go`
@@ -882,7 +882,7 @@ func Checkpoint() []byte {
 rm blockchain.db
 ```
 
-## 9.1 PoW Proof Of Concept (10:13)
+## 9.1 PoW Proof Of Concept
 
 - Mining prototype
 
@@ -901,12 +901,12 @@ for {
 }
 ```
 
-## 9.2 Mine Block (07:48)
+## 9.2 Mine Block
 
 - func mine at `block.go`
 - Modify way get hash -> `block.mine()` at `block.go`
 
-## 9.3 Difficulty part One (10:20)
+## 9.3 Difficulty part One
 
 - Refactor Hash from `block.go` to `utils.go`
 
@@ -935,7 +935,7 @@ func (b *blockchain) difficulty() int {
 }
 ```
 
-## 9.4 Difficulty part Two (11:56)
+## 9.4 Difficulty part Two
 
 - Add const blockInterval, allowedRange at `chain.go`
 - Whenever create new block, `b.CurrentDifficulty = block.Difficulty`
@@ -950,7 +950,7 @@ if actualTime <= (expectedTime - allowedRange) {
 return b.CurrentDifficulty
 ```
 
-## 9.5 Conclusions (06:28)
+## 9.5 Conclusions
 
 - Add status route at `rest.go`
 - Refactor Handling errors for encoder at `rest.go`
@@ -958,13 +958,13 @@ return b.CurrentDifficulty
 
 # 10 TRANSACTIONS
 
-## 10.0 Introduction (04:37)
+## 10.0 Introduction
 
 - Course ~#9 were all about Protecting Data
 - Here going to learn Moving value between our user
 - uTxOut: Unspent Transaction Output mpdel?
 
-## 10.1 Introduction to Transactions (07:01)
+## 10.1 Introduction to Transactions
 
 - Tx
   - TxIn[$5(me)]: money that i have
@@ -978,7 +978,7 @@ return b.CurrentDifficulty
   - TxIn[$10(blockchain)]
   - TxOut[$10(miner)]
 
-## 10.2 Coinbase Transaction (11:18)
+## 10.2 Coinbase Transaction
 
 ```sh
 touch blockchain/transactions.go
@@ -988,23 +988,23 @@ touch blockchain/transactions.go
 - Remove Data, Add Transaction to struct Block at `block.go`
 - Refactor to remove Data at `rest.go, explorer.go, block.go, chain.go`
 
-## 10.3 Balances (13:30)
+## 10.3 Balances
 
 - Add func txOuts, TxOutsByAddress, BalanceByAddress at `chain.go`
 - Add struct balanceResponse, func balance, router balance at `rest.go`
 
-## 10.4 Mempool (04:28)
+## 10.4 Mempool
 
 - Memory pool: where we put unconfirmed transaction
 - After confirmed -> Part of Block
 
-## 10.5 AddTx (10:42)
+## 10.5 AddTx
 
 - Cuz Mempool is on the memory, we don't need to initialize
 - Add struct mempool, var Mempool, func makeTx, AddTx at `transactions.go`
 - Add router mempool at `rest.go`
 
-## 10.6 makeTx (11:33)
+## 10.6 makeTx
 
 - Improve func maskTx at `transactions.go`:
   - BalanceByAddress < amount -> error
@@ -1013,7 +1013,7 @@ touch blockchain/transactions.go
   - append &TxOut{to, amount} to txOuts
 - Add struct addTxPayload, router transactions at `rest.go`
 
-## #10.7 Confirm Transactions (11:54)
+## #10.7 Confirm Transactions
 
 - Refactor Transactions to after block.mine() at `block.go`
 
@@ -1025,7 +1025,7 @@ block.Transactions = Mempool.TxToConfirm()
 - Add func TxToConfirm at `transactions.go`
 - Duplication bug: we should check if the coin of txOut was already used or not
 
-## 10.8 uTxOuts (12:02)
+## 10.8 uTxOuts
 
 - We need to find which one is duplicated
 
@@ -1051,28 +1051,28 @@ Amount int
 
 - Remove func txOuts, Rename TxOutsByAddress to UTxOutsByAddress at `chain.go`
 
-## 10.9 UTxOutsByAddress (10:37)
+## 10.9 UTxOutsByAddress
 
 - Implement UTxOutsByAddress at `chain.go`
   - In all inputs, if address equal to the owner, append TxId to creatorTxs
   - In all outputs, if address is equal to the owner and TxId is `not` in creatorTxs, append to uTxOuts
 - Refactor Tx.Id, getId => `ID` at `transactions.go`
 
-## 10.10 makeTx part Two (10:04)
+## 10.10 makeTx part Two
 
 - Impl makeTx at `transactions.go`
 - But, It stil copy the coin if the Tx is on mempool
   - it checkes spent or unspent only (confirmed)
   - Should check unconfirmed Tx too.
 
-## 10.11 isOnMempool (06:55)
+## 10.11 isOnMempool
 
 - Impl func isOnMempool at `transactions.go`
 - Add !isOnMempool condition to UTxOutsByAddress at `chain.go`
 - looks like working but why error message is "not enough funds" not "not enough money"?
   - does rest.go convert error automatically?
 
-## 10.12 Refactoring (16:46)
+## 10.12 Refactoring
 
 ### Refactor redundant loop
 
@@ -1115,7 +1115,7 @@ Outer:
 - Else, -> normal `func` with struct as input param
 - Sort method first, func last
 
-## 10.13 Deadlock (03:53)
+## 10.13 Deadlock
 
 - Current func Blockchain at `chain.go` is recursive
 - Because no call to Do returns until the one call to f returns, if f causes Do to be called, it will deadlock.
@@ -1126,7 +1126,7 @@ Outer:
 
 # 11 WALLETS
 
-## 11.0 Introduction (04:50)
+## 11.0 Introduction
 
 - If he owns unspent output
 - If he approved the transaction
@@ -1140,7 +1140,7 @@ mkdir wallet
 touch wallet/wallet.go
 ```
 
-## 11.1 Private and Public Keys (08:26)
+## 11.1 Private and Public Keys
 
 1. Hash the msg
 
@@ -1167,7 +1167,7 @@ keypair (privateKey, publicKey)
 ("hashed_message" + "signature" + publicKey) -> true / false
 ```
 
-## 11.2 Signing Messages (10:25)
+## 11.2 Signing Messages
 
 - ecdsa: Elliptic Curve Digital Signature Algorithm
 
@@ -1177,7 +1177,7 @@ hashAsBytes = hex.DecodeString(Hash(message))
 r, s = ecdsa.Sign
 ```
 
-## 11.3 Verifying Messages (13:23)
+## 11.3 Verifying Messages
 
 - Refactor generated values to constant var
 
@@ -1210,7 +1210,7 @@ const (
 )
 ```
 
-## 11.4 Restoring (12:26)
+## 11.4 Restoring
 
 ```go
 privByte, err := hex.DecodeString(privateKey)
@@ -1234,12 +1234,12 @@ ok := ecdsa.Verify(&privateKey.PublicKey, hashBytes, &bigR, &bigS)
 fmt.Println(ok)
 ```
 
-## 11.5 Wallet Backend (10:41)
+## 11.5 Wallet Backend
 
 - Add func hasWalletFile at `wallet.go`
 - Singletone pattern func Wallet skeleton at `wallet.go`
 
-## 11.6 Persit Wallet (09:16)
+## 11.6 Persit Wallet
 
 - Add func createPrivKey, persistKey at `wallet.go`
 - If there is new var togather, we can recreate err with `newVar err :=`
@@ -1262,7 +1262,7 @@ utils.HandleErr(err)
 newVar2, err := os.WriteFile(fileName, bytes, 0644)
 ```
 
-## 11.7 Restore Wallet (09:15)
+## 11.7 Restore Wallet
 
 - Add func restoreKey at `wallet.go`
 - Names return: good for short func, easy to understand only with signature, bad for long function's retunry `empty` and lookup above again
@@ -1277,28 +1277,28 @@ func restoreKey() (key *ecdsa.PrivateKey ){
 }
 ```
 
-## 11.8 Addresses (09:20)
+## 11.8 Addresses
 
 - Add func aFromK, sign at `wallet.go`
 - Replace `"nico"` to `wallet.Wallet().Address` at `transactions.go`
 
-## 11.9 Verification Function (11:24)
+## 11.9 Verification Function
 
 - Add func restoreBigInts, verify at `wallet.go`
 - restoreBigints can handle signature, address(to publicKey)
 
-## 11.10 Recap (08:56)
+## 11.10 Recap
 
 - Add func encodeBigInts at `wallet.go`
 - Refactor with encodeBigInts
 
-## 11.11 Transaction Signing (11:01)
+## 11.11 Transaction Signing
 
 - Add func Txs, FindTx at `chain.go`
 - Rename TxIn.Owner -> Signature, TxOut.Owner -> Address at `transactions.go`
 - Add func sign at `transactions.go`
 
-## 11.12 Transaction Verification (16:36)
+## 11.12 Transaction Verification
 
 ### `transactions.go`
 
@@ -1327,7 +1327,7 @@ input.Onwer == address
 if FindTx(b, input.TxID).TxOuts[input.Index].Address == address
 ```
 
-## 11.13 Conclusions (06:58)
+## 11.13 Conclusions
 
 ### `rest.go`
 
@@ -1351,7 +1351,7 @@ func myWallet(rw http.ResponseWriter, r *http.Request) {
 - Study more (signature - address - name) relationship
 - How to filter mempool-ed Tx?
 
-## 11.14 Recap (10:16)
+## 11.14 Recap
 
 ### `rest.go`
 
@@ -1383,11 +1383,11 @@ TxIn.Sign + TxOut1.Address -> true / false
 
 # 12 P2P
 
-## 12.0 Introduction (05:55)
+## 12.0 Introduction
 
 - Lean Peer To Peer by simple Chatting app
 
-## 12.1 Why Go Routines (09:44)
+## 12.1 Why Go Routines
 
 ### Goroutine
 
@@ -1398,13 +1398,13 @@ TxIn.Sign + TxOut1.Address -> true / false
 go countToTen()
 ```
 
-## 12.2 Channels (16:07)
+## 12.2 Channels
 
 ### Channels
 
 - Deadlock: Channel should not receive more than coroutine
 
-## 12.3 Raead, Receive and Close (11:00)
+## 12.3 Raead, Receive and Close
 
 ```go
 func countToTen(c chan<- int) { // send only chan<-
@@ -1434,7 +1434,7 @@ func main() {
 }
 ```
 
-## 12.4 Buffered Channels (14:29)
+## 12.4 Buffered Channels
 
 ```go
 c := make(chan int, NumOfBuffer)
@@ -1442,7 +1442,7 @@ c := make(chan int, NumOfBuffer)
 
 - Don't block first N values, then block/wait the queue like normal Unbuffered channel
 
-## 12.5 WebSocket Upgrades (11:47)
+## 12.5 WebSocket Upgrades
 
 - HTTP: stateless
 - WS: statefull, connected
@@ -1471,7 +1471,7 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 - Add ws to URL, router
 - Add func loggerMiddleware
 
-## 12.6 ReadMessage (13:18)
+## 12.6 ReadMessage
 
 ### `p2p/p2p.go`
 
@@ -1481,7 +1481,7 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 - Add conn.ReadMessage with for loop
   - conn.ReadMessage is a receiver Channel for socket
 
-## 12.7 WriteMessage (11:02)
+## 12.7 WriteMessage
 
 ### `chat.html`
 
@@ -1491,7 +1491,7 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 
 - Add conn.WriteMessage
 
-## 12.8 Connections (13:02)
+## 12.8 Connections
 
 - Connect client to client through server
 - http.ListenAndServe uses goroutine
@@ -1505,7 +1505,7 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 - If browser is refreshed, gets error -> How to handle closed connection?
 - A Message should not block others -> How to separate?
 
-## 12.9 Peers (17:51)
+## 12.9 Peers
 
 - Should connect peer and peer not through server
 
@@ -1517,7 +1517,7 @@ const socket = new WebSocket("ws://localhost:4000/ws");
 
 - Add struct addPeerPayload, func peers, router peers
 
-## 12.10 initPeer (10:29)
+## 12.10 initPeer
 
 ### `p2p/peer.go`
 
@@ -1531,7 +1531,7 @@ touch p2p/peer.go
 
 - Add GET to router peers
 
-## 12.11 openPort (10:46)
+## 12.11 openPort
 
 ### `p2p/p2p.go`
 
@@ -1549,7 +1549,7 @@ touch p2p/peer.go
 
 - p2p.Addpeer(..., port)
 
-## 12.12 Recap (14:24)
+## 12.12 Recap
 
 ### `utils.go`
 
@@ -1559,7 +1559,7 @@ touch p2p/peer.go
 
 - Refactor with utils.Splitter
 
-## #12.13 Read Peer (11:06)
+## #12.13 Read Peer
 
 ### `p2p/peer.go`
 
@@ -1570,7 +1570,7 @@ touch p2p/peer.go
 
 - Add conn.WriteMessage at func `Upgrade`
 
-## 12.14 Inbox (08:30)
+## 12.14 Inbox
 
 - Instead of writing once, use coroutine and channel
 
@@ -1587,7 +1587,7 @@ touch p2p/peer.go
 
 - send message to inbox(channel)
 
-## 12.15 Cleanup (09:57)
+## 12.15 Cleanup
 
 ### `p2p/p2p.go`
 
@@ -1599,7 +1599,7 @@ touch p2p/peer.go
 - Add func `close`
 - Add defer p.close() at `read`, `write`
 
-## 12.16 Data Race (12:39)
+## 12.16 Data Race
 
 - Stable bolt has socket hangs up error with race
 - Change to bbolt
@@ -1616,7 +1616,7 @@ import (bolt "go.etcd.io/bbolt")
 - Data Race: When more than two goroutine access to the same block
 - When we read and modify peers at the same time, gets Data race error
 
-## 12.17 Mutex (13:44)
+## 12.17 Mutex
 
 ### `p2p/peer.go`
 
@@ -1663,7 +1663,7 @@ func (p *peer) close() {
 ]
 ```
 
-## 12.18 Demonstration (08:44)
+## 12.18 Demonstration
 
 - Can use func with defer to delay between lock and unlock
   - -> Can Demonstrate the mutex
@@ -1680,7 +1680,7 @@ func (p *peer) close() {
 }
 ```
 
-## 12.19 Messages (13:41)
+## 12.19 Messages
 
 ### Messaging Scenario
 
@@ -1720,7 +1720,7 @@ const (
 - Let's Communicate with json
 - Change from `ReadMessage` to `ReadJSON`
 
-## 12.20 Newest Block (11:31)
+## 12.20 Newest Block
 
 ### `p2p/messages.go`
 
@@ -1733,7 +1733,7 @@ const (
 
 - sendNewstBlock in addPeer
 
-## 12.22 Handle Message (09:50)
+## 12.22 Handle Message
 
 ### `utils.go`
 
@@ -1748,13 +1748,13 @@ const (
 
 - handleMsg whenever read()
 
-## 12.23 Recap (10:01)
+## 12.23 Recap
 
 ### `p2p/peer.go`
 
 - Datarace: Though there is lock at close(), opposite side stil add Peer twice -> Add Lock at initPeer
 
-## 12.24 All Blocks (14:19)
+## 12.24 All Blocks
 
 ### `db/db.go`
 
@@ -1773,7 +1773,7 @@ const (
 
 - Why don't we just get height with blockchain.Height?
 
-## 12.25 Recap (10:15)
+## 12.25 Recap
 
 - Add console print
 
@@ -1800,7 +1800,7 @@ const (
 8. 3000: 127.0.0.1:4000 wants all the blocks.
 9. 4000: Received all the blocks from 127.0.0.1:3000
 
-## 12.26 Replace Blockchain (10:59)
+## 12.26 Replace Blockchain
 
 - Can syncronize and persist now!
 
@@ -1822,7 +1822,7 @@ const (
 
 - blockchain.Blockchain().Replace(payload) at the end of handleMsg
 
-## 12.27 Broadcast Block (11:29)
+## 12.27 Broadcast Block
 
 ### Solve datarace: cover blockchain with mutex
 
@@ -1848,7 +1848,7 @@ const (
 - `/blocks`: after AddBlock, BroadcastNewBlock
 - `/status`: blockchain.Status
 
-## 12.28 AddPeerBlock (07:28)
+## 12.28 AddPeerBlock
 
 - Now connecting peers manually, right after mining, it broadcasts!
 
@@ -1860,7 +1860,7 @@ const (
 
 - MessageNewBlockNotify -> AddPeerBlock
 
-## 12.29 Broadcast Transactions (14:45)
+## 12.29 Broadcast Transactions
 
 - Now right after Tx, even mempool is synced!
 
@@ -1884,7 +1884,7 @@ const (
 
 - Add p2p.BroadcastNewTx(tx)
 
-## 12.30 Global Memory Pool (10:53)
+## 12.30 Global Memory Pool
 
 ### Todo: Not only mining but also broadcasting should empty mempool as well
 
@@ -1898,7 +1898,7 @@ const (
 - Rename block -> newBlock
 - Add delete tx logic
 
-## 12.31 Broadcast New Peer (13:08)
+## 12.31 Broadcast New Peer
 
 - If more than 3 peers, should inform there is new peer
 
@@ -1912,7 +1912,7 @@ const (
 
 - Add iota MessageNewPeerNotify, func notifyNewPeer
 
-## 12.32 Network Accomplished (16:03)
+## 12.32 Network Accomplished
 
 ### `p2p/messages.go`
 
@@ -1936,7 +1936,7 @@ const (
    127.0.0.1:4000 wants all the blocks.
    ```
 
-## 12.33 Recap (04:31)
+## 12.33 Recap
 
 1. AddPeer(payload.Address, payload.Port, port[1:], true)
 2. broadcastNewPeer

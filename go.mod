@@ -1,4 +1,4 @@
-module github.com/devgony/nomadcoin
+module github.com/devgony/gophercoin
 
 go 1.16
 
