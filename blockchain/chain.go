@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/devgony/nomadcoin/db"
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/gophercoin/db"
+	"github.com/devgony/gophercoin/utils"
 )
 
 const (

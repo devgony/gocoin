@@ -10,11 +10,11 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/gophercoin/utils"
 )
 
 const (
-	fileName string = "nomadcoin.wallet"
+	fileName string = "gophercoin.wallet"
 )
 
 type wallet struct {
@@ -25,7 +25,7 @@ type wallet struct {
 var w *wallet
 
 func hasWalletFile() bool {
-	_, err := os.Stat("nomadcoin.wallet")
+	_, err := os.Stat("gophercoin.wallet")
 	return !os.IsNotExist(err)
 }
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/gophercoin/utils"
 	bolt "go.etcd.io/bbolt"
 )
 

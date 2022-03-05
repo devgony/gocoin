@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/devgony/nomadcoin/blockchain"
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/gophercoin/blockchain"
+	"github.com/devgony/gophercoin/utils"
 	"github.com/gorilla/websocket"
 )
 

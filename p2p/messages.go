@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/devgony/nomadcoin/blockchain"
-	"github.com/devgony/nomadcoin/utils"
+	"github.com/devgony/gophercoin/blockchain"
+	"github.com/devgony/gophercoin/utils"
 )
 
 type MessageKind int

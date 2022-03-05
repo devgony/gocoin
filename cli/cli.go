@@ -6,8 +6,8 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/devgony/nomadcoin/explorer"
-	"github.com/devgony/nomadcoin/rest"
+	"github.com/devgony/gophercoin/explorer"
+	"github.com/devgony/gophercoin/rest"
 )
 
 func usage() {

@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/devgony/nomadcoin/blockchain"
-	"github.com/devgony/nomadcoin/p2p"
-	"github.com/devgony/nomadcoin/utils"
-	"github.com/devgony/nomadcoin/wallet"
+	"github.com/devgony/gophercoin/blockchain"
+	"github.com/devgony/gophercoin/p2p"
+	"github.com/devgony/gophercoin/utils"
+	"github.com/devgony/gophercoin/wallet"
 	"github.com/gorilla/mux"
 )
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/devgony/nomadcoin/cli"
-	"github.com/devgony/nomadcoin/db"
+	"github.com/devgony/gophercoin/cli"
+	"github.com/devgony/gophercoin/db"
 )
 
 const (
